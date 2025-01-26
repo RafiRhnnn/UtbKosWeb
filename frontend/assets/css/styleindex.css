@@ -1,0 +1,50 @@
+.navbar-brand {
+    font-family: "Diplomata SC", serif;
+    font-weight: 800;
+    font-style: normal;
+    font-size: 30px;
+  }
+
+  #logoutbkos {
+    opacity: 0; /* Mulai dengan gambar tersembunyi */
+    transform: translateY(0); /* Posisi awal */
+    animation: fadeIn 2s forwards, float 2s infinite ease-in-out; /* Animasi fade-in dan float */
+}
+
+/* Animasi fade-in */
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(-30px); /* Mulai dari atas */
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0); /* Posisi normal */
+    }
+}
+
+/* Animasi float */
+@keyframes float {
+    0% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+
+.rounded-img {
+    max-width: 60%;
+    border-radius: 15px; /* Menambahkan lengkungan */
+    height: auto;
+}
+
+section {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
