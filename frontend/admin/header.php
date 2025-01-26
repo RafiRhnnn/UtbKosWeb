@@ -1,4 +1,5 @@
-<div class="d-flex flex-column flex-shrink-0 p-3 bg-dark text-white" style="width: 280px; height: 100vh;">
+<div class="d-flex flex-column flex-shrink-0 p-3 bg-dark text-white"
+    style="width: 280px; height: 100vh; position: fixed; top: 0; left: 0;">
     <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
         <span class="fs-4">Dashboard</span>
     </a>
@@ -10,7 +11,7 @@
             </a>
         </li>
         <li>
-            <a href="#" class="nav-link text-white">
+            <a href="kelola.php" class="nav-link text-white">
                 Kelola
             </a>
         </li>
@@ -20,7 +21,7 @@
             </a>
         </li>
         <li>
-            <a href="#" class="nav-link text-white">
+            <a href="pesanan.php" class="nav-link text-white">
                 Pesanan
             </a>
         </li>

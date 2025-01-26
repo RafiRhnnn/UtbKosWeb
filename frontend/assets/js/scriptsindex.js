@@ -30,3 +30,4 @@ document.addEventListener("DOMContentLoaded", () => {
     // Jalankan pergantian gambar setiap 3 detik
     setInterval(changeImage, 3000);
 });
+
