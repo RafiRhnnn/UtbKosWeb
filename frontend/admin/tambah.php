@@ -24,53 +24,38 @@
 
             <form action="" id="addNewsForm">
                 <div>
-                    <label for="title">Title:</label>
+                    <label for="title">Nama kosan:</label>
+                    <input type="text" id="judul" name="judul" class="form-control" maxlength="50" required>
+                </div>
+                <div>
+                    <label for="title">Alamat kosan:</label>
+                    <input type="text" id="judul" name="judul" class="form-control" maxlength="50" required>
+                </div>
+                <div>
+                    <label for="title">Harga Sewa /Bulan:</label>
                     <input type="text" id="judul" name="judul" class="form-control" maxlength="50" required>
                 </div>
 
                 <div>
-                    <label for="title">Content:</label>
+                    <label for="title">Fasilitass:</label>
                     <textarea rows="" cols="" class="form-control" id="deskripsi" name="deskripsi" required></textarea>
                 </div>
 
                 <div>
-                    <label for="title">Image:</label>
+                    <label for="title">Foto kosan :</label>
                     <input type="file" id="url_image" name="url_image" class="form-control file" accept="image/*"
                         required>
                 </div>
 
 
-                <button type="button" class="btn btn-primary" onclick="addNews()">Add News</button>
+                <button type="button" class="btn btn-primary " onclick="addNews()">Tambah Kosan</button>
             </form>
         </div>
     </div>
 
 
-    <script>
-    // Chart.js Example
-    const ctx = document.getElementById('profitChart').getContext('2d');
-    const profitChart = new Chart(ctx, {
-        type: 'bar',
-        data: {
-            labels: ['January', 'February', 'March', 'April', 'May'],
-            datasets: [{
-                label: 'Total Profit',
-                data: [12000, 15000, 17000, 14000, 20000],
-                backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                borderColor: 'rgba(75, 192, 192, 1)',
-                borderWidth: 1
-            }]
-        },
-        options: {
-            responsive: true,
-            plugins: {
-                legend: {
-                    display: true,
-                    position: 'top'
-                }
-            }
-        }
-    });
+    <script src="../assets/js/scriptstambah.js">
+
     </script>
 </body>
 
