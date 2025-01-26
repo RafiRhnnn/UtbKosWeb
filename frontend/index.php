@@ -79,23 +79,26 @@
                 <h2 class="text-center mt-0"><span>Tentang</span> Kami</h2>
                 <!-- Kolom untuk teks (kiri) -->
                 <div class="col-md-6">
-                    <h3>Kenapa memilih kopi kami?</h3>
+                    <h3>Kenapa memilih UtbKos?</h3>
                     <p>
-                        Berbeda dengan bekerja di rumah atau di kantor yang bisa membuat
-                        kamu kehabisan asupan kafein saat bekerja, maka hal ini tak mungkin
-                        terjadi jika kamu bekerja di coffee shop.
+                        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Velit odio odit adipisci ex,
+                        voluptatem maxime facere dolore, autem id repudiandae nesciunt fugiat voluptate tempore, tempora
+                        quidem impedit similique libero vel. Et itaque, beatae, maiores doloribus id architecto
+                        repudiandae, reprehenderit veniam repellat rerum ex aut laborum labore eligendi necessitatibus.
+                        Cupiditate, pariatur.
                     </p>
                     <p>
-                        Sambil menyelesaikan pekerjaan kamu dengan mudah memesan kopi kepada
-                        barista tanpa perlu repot-repot beranjak dan menyeduh kopi untuk
-                        diri sendiri. Konsentrasi takkan terganggu karena untuk menikmati
-                        kafein kamu tak perlu mengalihkan perhatian dari layar laptop.
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam dolorum blanditiis molestias?
                     </p>
                 </div>
                 <!-- Kolom untuk gambar (kanan) -->
                 <div class="col-md-6 text-end">
-                    <img src="assets/images/kosan.jpg" alt="Tentang Kami" class="rounded-img">
+                    <div class="image-wrapper">
+                        <img src="assets/images/kosan.jpg" alt="Tentang Kami" class="rounded-img" id="images">
+                    </div>
                 </div>
+
+
             </div>
         </div>
     </section>

@@ -36,11 +36,19 @@
     }
 }
 
+.image-wrapper {
+    position: relative;
+    display: inline-block;
+}
+
 .rounded-img {
     max-width: 60%;
-    border-radius: 15px; /* Menambahkan lengkungan */
+    border-radius: 15px;
     height: auto;
+    transition: opacity 0.5s ease-in-out; /* Transisi gambar */
+    position: relative;
 }
+
 
 section {
     height: 100vh;
