@@ -24,19 +24,19 @@
                     <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
                         <div class="card shadow-lg" style="width: 24rem; margin: auto;">
                             <div class="card-body">
-                                <form>
+                                <form id="loginForm">
                                     <!-- Email input -->
                                     <div class="mb-3">
                                         <label for="email" class="form-label">Email address</label>
                                         <input type="email" id="email" class="form-control"
-                                            placeholder="Enter a valid email address">
+                                            placeholder="Enter a valid email address" required>
                                     </div>
 
                                     <!-- Password input -->
                                     <div class="mb-3">
                                         <label for="password" class="form-label">Password</label>
                                         <input type="password" id="password" class="form-control"
-                                            placeholder="Enter password">
+                                            placeholder="Enter password" required>
                                     </div>
 
                                     <div class="d-flex justify-content-between align-items-center mb-3">
@@ -50,7 +50,7 @@
 
                                     <!-- Submit button -->
                                     <div class="d-grid">
-                                        <button type="button" class="btn btn-primary">Login</button>
+                                        <button type="submit" class="btn btn-primary">Login</button>
                                     </div>
 
                                     <p class="text-center mt-3">Belum mempunyai akun? <a href="register.php"
@@ -90,8 +90,40 @@
     </section>
 
 </body>
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
 </script>
+
+<script>
+    document.getElementById('loginForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        var email = document.getElementById('email').value;
+        var password = document.getElementById('password').value;
+
+        var formData = new FormData();
+        formData.append('username_or_email', email);
+        formData.append('password', password);
+
+        fetch('http://localhost/UtbKosWeb/backend/login.php', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.message === "Login berhasil!") {
+                // Login berhasil arahkan ke front end
+                window.location.href = "user/indexuser.php"; // benerken path
+            } else {
+                alert(data.message); //eror 
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+    });
+</script>
+
 
 </html>
