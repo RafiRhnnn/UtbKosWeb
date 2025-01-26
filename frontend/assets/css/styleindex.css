@@ -56,3 +56,34 @@ section {
     align-items: center;
     justify-content: center;
 }
+
+#promo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center; /* Pastikan teks di tengah */
+}
+
+#promo .promo-images {
+    display: flex;
+    flex-wrap: wrap; /* Membuat gambar promo otomatis membungkus ke bawah */
+    gap: 1.5rem; /* Memberikan jarak antar gambar */
+    justify-content: center; /* Gambar diatur ke tengah */
+    margin-top: 1rem; /* Jarak gambar dari heading */
+}
+
+#promo img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 15px; /* Sudut melengkung untuk semua gambar promo */
+}
+
+#promoCarousel {
+    max-width: 800px; /* Batas lebar carousel */
+    margin: 0 auto; /* Tengah di halaman */
+}
+
+#promoCarousel img {
+    border-radius: 15px; /* Sudut melengkung */
+}
+

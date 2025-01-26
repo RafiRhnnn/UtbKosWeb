@@ -44,15 +44,6 @@
                                         placeholder="Enter password">
                                 </div>
 
-                                <div class="d-flex justify-content-between align-items-center mb-3">
-                                    <!-- Checkbox -->
-                                    <div class="form-check">
-                                        <input type="checkbox" id="remember" class="form-check-input">
-                                        <label for="remember" class="form-check-label">Remember me</label>
-                                    </div>
-                                    <a href="#" class="text-decoration-none">Forgot password?</a>
-                                </div>
-
                                 <!-- Submit button -->
                                 <div class="d-grid">
                                     <button type="button" class="btn btn-primary">Login</button>
