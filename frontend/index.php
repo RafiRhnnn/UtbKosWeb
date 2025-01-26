@@ -38,6 +38,9 @@
                     <li class="nav-item mx-9">
                         <a class="nav-link" href="#">Feature</a>
                     </li>
+                    <li class="nav-item mx-9">
+                        <a class="nav-link" href="../frontend/login.php">Login</a>
+                    </li>
                 </ul>
             </div>
 

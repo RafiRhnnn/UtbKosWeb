@@ -1,0 +1,25 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+.container-fluid {
+    display: flex;
+    flex-direction: row;
+}
+
+.sidebar {
+    width: 280px;
+    background-color: #343a40;
+    color: white;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+
+.main-content {
+    margin-left: 280px; /* Beri jarak sesuai dengan lebar sidebar */
+    padding: 20px;
+}
