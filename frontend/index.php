@@ -37,7 +37,7 @@
                             <a class="nav-link" href="#promo">Promo</a>
                         </li>
                         <li class="nav-item mx-9">
-                            <a class="nav-link" href="#">Feature</a>
+                            <a class="nav-link" href="#feature">Feature</a>
                         </li>
                         <li class="nav-item mx-9">
                             <a class="nav-link" href="../frontend/login.php">Login</a>
@@ -158,8 +158,96 @@
             </p>
         </section>
         <!-- promo akhir -->
+
+        <!-- feature mulai -->
+        <section id="feature" class="bg-light py-5">
+            <div class="container">
+                <h2 class="text-center mb-4">Fitur Unggulan</h2>
+                <div class="row">
+                    <!-- Fitur 1 -->
+                    <div class="col-md-4 mb-4">
+                        <div class="card shadow-sm">
+                            <img src="assets/images/kosan.jpg" class="card-img-top" alt="Cari Kost">
+                            <div class="card-body">
+                                <h5 class="card-title">Pencarian Kost Mudah</h5>
+                                <p class="card-text">Cari kost sesuai dengan lokasi, harga, dan fasilitas yang kamu butuhkan dengan cepat dan mudah.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Fitur 2 -->
+                    <div class="col-md-4 mb-4">
+                        <div class="card shadow-sm">
+                            <img src="assets/images/kosan1.jpg" class="card-img-top" alt="Pembayaran Online">
+                            <div class="card-body">
+                                <h5 class="card-title">Pembayaran Online</h5>
+                                <p class="card-text">Nikmati kemudahan pembayaran sewa kost dengan berbagai metode pembayaran yang aman dan praktis.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Fitur 3 -->
+                    <div class="col-md-4 mb-4">
+                        <div class="card shadow-sm">
+                            <img src="assets/images/kosan2.jpg" class="card-img-top" alt="Promo dan Diskon">
+                            <div class="card-body">
+                                <h5 class="card-title">Promo dan Diskon</h5>
+                                <p class="card-text">Dapatkan penawaran menarik dan diskon eksklusif setiap bulan untuk berbagai pilihan kost.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <!-- Fitur 4 -->
+                    <div class="col-md-4 mb-4">
+                        <div class="card shadow-sm">
+                            <img src="assets/images/kosan.jpg" class="card-img-top" alt="Layanan Pelanggan">
+                            <div class="card-body">
+                                <h5 class="card-title">Layanan Pelanggan 24/7</h5>
+                                <p class="card-text">Tim kami siap membantu menjawab pertanyaan dan memberikan solusi kapan saja.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Fitur 5 -->
+                    <div class="col-md-4 mb-4">
+                        <div class="card shadow-sm">
+                            <img src="assets/images/kosan1.jpg" class="card-img-top" alt="Detail Fasilitas">
+                            <div class="card-body">
+                                <h5 class="card-title">Detail Fasilitas Kost</h5>
+                                <p class="card-text">Dapatkan informasi lengkap tentang fasilitas yang tersedia di setiap kost sebelum memutuskan untuk menyewa.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Fitur 6 -->
+                    <div class="col-md-4 mb-4">
+                        <div class="card shadow-sm">
+                            <img src="assets/images/kosan2.jpg" class="card-img-top" alt="Ulasan Pengguna">
+                            <div class="card-body">
+                                <h5 class="card-title">Ulasan dan Rating Pengguna</h5>
+                                <div class="rating mb-2">
+                                    <span class="text-warning">&#9733;</span>
+                                    <span class="text-warning">&#9733;</span>
+                                    <span class="text-warning">&#9733;</span>
+                                    <span class="text-warning">&#9733;</span>
+                                    <span class="text-muted">&#9734;</span>
+                                    <small class="text-muted">(4.7)</small>
+                                </div>
+                                <p class="card-text">Baca ulasan dari pengguna lain untuk membantu kamu memilih kost yang terbaik sesuai kebutuhan.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- feature akhir -->
+
         <!-- footer mulai -->
-        <footer class="bg-dark text-white text-center py-3">
+        <footer class="bg-dark text-white text-center py-2">
             <p>&copy; 2025 Utbkos. All rights reserved.</p>
         </footer>
 

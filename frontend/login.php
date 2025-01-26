@@ -23,7 +23,7 @@
                 <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
                     <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
                         <div class="card shadow-lg" style="width: 24rem; margin: auto;">
-                            <div class="card-body">
+                            <div class="card-body" style="background-color: rgba(0, 0, 0, 0.3);">
                                 <form id="loginForm">
                                     <!-- Email input -->
                                     <div class="mb-3">
@@ -107,21 +107,21 @@
         formData.append('password', password);
 
         fetch('http://localhost/UtbKosWeb/backend/login.php', {
-            method: 'POST',
-            body: formData
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.message === "Login berhasil!") {
-                // Login berhasil arahkan ke front end
-                window.location.href = "user/indexuser.php"; // benerken path
-            } else {
-                alert(data.message); //eror 
-            }
-        })
-        .catch(error => {
-            console.error('Error:', error);
-        });
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.message === "Login berhasil!") {
+                    // Login berhasil arahkan ke front end
+                    window.location.href = "user/indexuser.php"; // benerken path
+                } else {
+                    alert(data.message); //eror 
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
     });
 </script>
 

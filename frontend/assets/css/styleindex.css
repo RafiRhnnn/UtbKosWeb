@@ -3,23 +3,29 @@
     font-weight: 800;
     font-style: normal;
     font-size: 30px;
-  }
+}
 
-  #logoutbkos {
-    opacity: 0; /* Mulai dengan gambar tersembunyi */
-    transform: translateY(0); /* Posisi awal */
-    animation: fadeIn 2s forwards, float 2s infinite ease-in-out; /* Animasi fade-in dan float */
+#logoutbkos {
+    opacity: 0;
+    /* Mulai dengan gambar tersembunyi */
+    transform: translateY(0);
+    /* Posisi awal */
+    animation: fadeIn 2s forwards, float 2s infinite ease-in-out;
+    /* Animasi fade-in dan float */
 }
 
 /* Animasi fade-in */
 @keyframes fadeIn {
     0% {
         opacity: 0;
-        transform: translateY(-30px); /* Mulai dari atas */
+        transform: translateY(-30px);
+        /* Mulai dari atas */
     }
+
     100% {
         opacity: 1;
-        transform: translateY(0); /* Posisi normal */
+        transform: translateY(0);
+        /* Posisi normal */
     }
 }
 
@@ -28,9 +34,11 @@
     0% {
         transform: translateY(0);
     }
+
     50% {
         transform: translateY(-10px);
     }
+
     100% {
         transform: translateY(0);
     }
@@ -45,7 +53,8 @@
     max-width: 60%;
     border-radius: 15px;
     height: auto;
-    transition: opacity 0.5s ease-in-out; /* Transisi gambar */
+    transition: opacity 0.5s ease-in-out;
+    /* Transisi gambar */
     position: relative;
 }
 
@@ -61,29 +70,58 @@ section {
     display: flex;
     flex-direction: column;
     align-items: center;
-    text-align: center; /* Pastikan teks di tengah */
+    text-align: center;
+    margin-bottom: 80px;
+    /* Pastikan teks di tengah */
 }
 
 #promo .promo-images {
     display: flex;
-    flex-wrap: wrap; /* Membuat gambar promo otomatis membungkus ke bawah */
-    gap: 1.5rem; /* Memberikan jarak antar gambar */
-    justify-content: center; /* Gambar diatur ke tengah */
-    margin-top: 1rem; /* Jarak gambar dari heading */
+    flex-wrap: wrap;
+    /* Membuat gambar promo otomatis membungkus ke bawah */
+    gap: 1.5rem;
+    /* Memberikan jarak antar gambar */
+    justify-content: center;
+    /* Gambar diatur ke tengah */
+    margin-top: 1rem;
+    /* Jarak gambar dari heading */
 }
 
 #promo img {
     max-width: 100%;
     height: auto;
-    border-radius: 15px; /* Sudut melengkung untuk semua gambar promo */
+    border-radius: 15px;
+    /* Sudut melengkung untuk semua gambar promo */
 }
 
 #promoCarousel {
-    max-width: 800px; /* Batas lebar carousel */
-    margin: 0 auto; /* Tengah di halaman */
+    max-width: 800px;
+    /* Batas lebar carousel */
+    margin: 0 auto;
+    /* Tengah di halaman */
 }
 
 #promoCarousel img {
-    border-radius: 15px; /* Sudut melengkung */
+    border-radius: 15px;
+    /* Sudut melengkung */
 }
 
+
+#feature {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 100px;
+}
+
+.card-img-top {
+    object-fit: cover;
+    height: 200px;
+    /* Sesuaikan tinggi gambar */
+}
+
+.card {
+    height: 100%;
+    /* Supaya setiap kartu seragam */
+}
