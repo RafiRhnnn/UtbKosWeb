@@ -108,15 +108,19 @@
     });
 
     function deletekos(id) {
-        if (confirm('Apakah Anda yakin ingin menghapus kosan ini?')) {
-            axios.post('http://localhost/UtbKosWeb/backend/deletekos.php', {
-                    id
-                })
-                .then(response => {
-                    alert('Kosan berhasil dihapus!');
+        var formData = new FormData();
+        formData.append('idkos', id);
+
+        if (confirm("Are you sure you want to delete this news?")) {
+            axios.post('http://localhost/UtbKosWeb/backend/deletekos.php', formData)
+                .then(function(response) {
+                    alert(response.data.message || 'News deleted successfully!');
                     $('#newsTable').DataTable().ajax.reload();
                 })
-                .catch(error => console.error(error));
+                .catch(function(error) {
+                    console.error(error);
+                    alert('Error deleting news.');
+                });
         }
     }
     </script>
