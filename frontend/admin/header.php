@@ -5,23 +5,27 @@
     </a>
     <hr>
     <ul class="nav nav-pills flex-column mb-auto">
+        <?php
+        // Ambil nama file dari URL saat ini
+        $current_page = basename($_SERVER['PHP_SELF']);
+        ?>
         <li class="nav-item">
-            <a href="dashboard.php" class="nav-link text-white active" aria-current="page">
+            <a href="dashboard.php" class="nav-link text-white <?php echo $current_page == 'dashboard.php' ? 'active' : ''; ?>" aria-current="page">
                 Dashboard
             </a>
         </li>
         <li>
-            <a href="kelola.php" class="nav-link text-white">
+            <a href="kelola.php" class="nav-link text-white <?php echo $current_page == 'kelola.php' ? 'active' : ''; ?>">
                 Kelola
             </a>
         </li>
         <li>
-            <a href="tambah.php" class="nav-link text-white">
+            <a href="tambah.php" class="nav-link text-white <?php echo $current_page == 'tambah.php' ? 'active' : ''; ?>">
                 Tambah kost
             </a>
         </li>
         <li>
-            <a href="pesanan.php" class="nav-link text-white">
+            <a href="pesanan.php" class="nav-link text-white <?php echo $current_page == 'pesanan.php' ? 'active' : ''; ?>">
                 Pesanan
             </a>
         </li>
