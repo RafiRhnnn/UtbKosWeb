@@ -1,13 +1,15 @@
 <?php
 include('koneksi.php');
 
-// cek apakah data dikirim melalui metode POST
+// Cek apakah data dikirim melalui metode POST
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    // Baca data dari JSON
+    $data = json_decode(file_get_contents("php://input"), true);
 
-    // ngambil data dari form POST
-    $username = $_POST['username'];
-    $email = $_POST['email'];
-    $password = $_POST['password'];
+    // Ambil data dari JSON
+    $username = $data['username'] ?? '';
+    $email = $data['email'] ?? '';
+    $password = $data['password'] ?? '';
 
     // Validasi wajib isi semua form
     if (empty($username) || empty($email) || empty($password)) {
@@ -18,12 +20,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Hash password menggunakan password_hash() (algoritma default bcrypt)
     $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
-    // Query untuk memasukkan data user ke tabel 'user'
+    // Query untuk memasukkan data user ke tabel 'users'
     $sql = "INSERT INTO users (username, email, password) VALUES (:username, :email, :password)";
-    
+
     // Prepare statement
     $stmt = $database_connection->prepare($sql);
-    
+
     // Bind parameter
     $stmt->bindParam(':username', $username);
     $stmt->bindParam(':email', $email);
@@ -35,5 +37,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     } else {
         echo json_encode(['message' => 'Terjadi kesalahan saat registrasi!']);
     }
+} else {
+    echo json_encode(['message' => 'Metode tidak diizinkan!']);
 }
-?>

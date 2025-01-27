@@ -10,7 +10,7 @@
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
     <link rel="icon" href="assets/images/logo.ico">
-    <script src="assets/js/scriptslogin.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </head>
 
 <body>
@@ -39,20 +39,10 @@
                                             placeholder="Enter password" required>
                                     </div>
 
-                                    <div class="d-flex justify-content-between align-items-center mb-3">
-                                        <!-- Checkbox -->
-                                        <div class="form-check">
-                                            <input type="checkbox" id="remember" class="form-check-input">
-                                            <label for="remember" class="form-check-label">Remember me</label>
-                                        </div>
-                                        <a href="#" class="text-decoration-none">Forgot password?</a>
-                                    </div>
-
                                     <!-- Submit button -->
                                     <div class="d-grid">
                                         <button type="submit" class="btn btn-primary">Login</button>
                                     </div>
-
                                     <p class="text-center mt-3">Belum mempunyai akun? <a href="register.php"
                                             class="text-danger">Register</a></p>
                                 </form>
@@ -89,41 +79,36 @@
         </div>
     </section>
 
-</body>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
-</script>
-
-<script>
+    <script>
     document.getElementById('loginForm').addEventListener('submit', function(e) {
-        e.preventDefault();
+        e.preventDefault(); // Menghentikan pengiriman form secara normal
 
-        var email = document.getElementById('email').value;
-        var password = document.getElementById('password').value;
+        // Ambil nilai dari form
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('password').value;
 
-        var formData = new FormData();
-        formData.append('username_or_email', email);
-        formData.append('password', password);
-
-        fetch('http://localhost/UtbKosWeb/backend/login.php', {
-                method: 'POST',
-                body: formData
+        // Kirim data ke backend menggunakan axios
+        axios.post('http://localhost/UtbKosWeb/backend/login.php', {
+                username_or_email: email, // Menyertakan email atau username
+                password: password // Menyertakan password
             })
-            .then(response => response.json())
-            .then(data => {
-                if (data.message === "Login berhasil!") {
-                    // Login berhasil arahkan ke front end
-                    window.location.href = "user/indexuser.php"; // benerken path
-                } else {
-                    alert(data.message); //eror 
+            .then(response => {
+                // Cek respons dari backend
+                if (response.data.message) {
+                    alert(response.data.message); // Tampilkan pesan dari backend
+                }
+
+                // Arahkan berdasarkan login yang sukses
+                if (response.data.redirect) {
+                    window.location.href = response.data.redirect;
                 }
             })
             .catch(error => {
                 console.error('Error:', error);
+                alert('Terjadi kesalahan, silakan coba lagi.');
             });
     });
-</script>
-
+    </script>
+</body>
 
 </html>

@@ -1,12 +1,16 @@
 <?php
 include('koneksi.php');
 
-// Cek apakah data dikirim melalui metode POST
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+// Set response sebagai JSON
+header('Content-Type: application/json');
 
-    // Ambil data dari form POST
-    $username_or_email = $_POST['username_or_email'];
-    $password = $_POST['password'];
+// Ambil data JSON yang dikirimkan melalui POST
+$data = json_decode(file_get_contents("php://input"), true);
+
+// Cek apakah data ada
+if (isset($data['username_or_email']) && isset($data['password'])) {
+    $username_or_email = $data['username_or_email'];
+    $password = $data['password'];
 
     // Validasi jika username/email atau password kosong
     if (empty($username_or_email)) {
@@ -30,8 +34,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if ($user) {
         // Verifikasi password
         if (password_verify($password, $user['password'])) {
-            // Login berhasil
-            echo json_encode(['message' => 'Login berhasil!', 'user' => $user]);
+            // Periksa jika email dan password cocok dengan admin
+            if ($user['email'] === 'admin@gmail.com' && $password === 'adminutbkos') {
+                echo json_encode(['message' => 'Login berhasil sebagai admin!', 'redirect' => 'admin/index.php']);
+            } else {
+                // Login berhasil sebagai user biasa
+                echo json_encode(['message' => 'Login berhasil!', 'redirect' => 'user/index.php']);
+            }
         } else {
             // Password salah
             echo json_encode(['message' => 'Password salah!']);
@@ -40,5 +49,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         // User tidak ditemukan
         echo json_encode(['message' => 'User atau Email tidak ditemukan!']);
     }
+} else {
+    echo json_encode(['message' => 'Metode tidak diizinkan!']);
 }
-?>
