@@ -4,11 +4,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Dashboard</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <title>Tambah Kosan</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <!-- DataTables -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <!-- Axios -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </head>
 
 <body>
@@ -20,29 +26,99 @@
 
         <!-- Konten Utama -->
         <div class="container mt-5">
-            <h2 class="mb-4">List News</h2>
-
+            <h2 class="mt-5">Daftar Kosan</h2>
             <table id="newsTable" class="table table-striped">
                 <thead>
                     <tr>
                         <th>No</th>
-                        <th>Title</th>
-                        <th>Description</th>
+                        <th>Nama Kost</th>
+                        <th>Alamat Kost</th>
+                        <th>Harga Sewa</th>
+                        <th>Fasilitas</th>
                         <th>Image</th>
-                        <th>Action</th>
+                        <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody></tbody>
             </table>
         </div>
-
-        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-        <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
     </div>
 
+    <script>
+    $(document).ready(function() {
+        // Initialize DataTable
+        $('#newsTable').DataTable({
+            'processing': true,
+            'serverSide': true,
+            'ajax': function(data, callback) {
+                axios.get('http://localhost/UtbKosWeb/backend/listkos.php', {
+                    params: {
+                        key: data.search.value
+                    }
+                }).then(function(response) {
+                    response.data.forEach(function(row, index) {
+                        row.no = index + 1;
+                    });
+                    callback({
+                        draw: data.draw,
+                        recordsTotal: response.data.length,
+                        recordsFiltered: response.data.length,
+                        data: response.data
+                    });
+                }).catch(function(error) {
+                    console.error(error);
+                    alert('Error fetching data.');
+                });
+            },
+            'columns': [{
+                    'data': 'no'
+                },
+                {
+                    'data': 'namakos'
+                },
+                {
+                    'data': 'alamatkos'
+                },
+                {
+                    'data': 'hargasewa'
+                },
+                {
+                    'data': 'fasilitas'
+                },
+                {
+                    'data': 'img',
+                    'render': function(data) {
+                        return `<img src="${data}" style="max-width: 100px; max-height: 100px;">`;
+                    }
+                },
+                {
+                    "data": null,
+                    "render": function(data, type, row) {
+                        return '<button class="btn btn-danger btn-sm" onclick="deletekos(' +
+                            row
+                            .id + ')">Delete</button>' +
+                            '<form action="editkos.php" method="post">' +
+                            '<input type="hidden" name="id" value="' + row.id + '">' +
+                            '<button type="submit" class="btn btn-primary btn-sm">Edit</button>'
+                        '</form>';
+                    }
+                }
+            ]
+        });
+    });
 
-    <script src="../assets/js/scriptstambah.js">
-
+    function deletekos(id) {
+        if (confirm('Apakah Anda yakin ingin menghapus kosan ini?')) {
+            axios.post('http://localhost/UtbKosWeb/backend/deletekos.php', {
+                    id
+                })
+                .then(response => {
+                    alert('Kosan berhasil dihapus!');
+                    $('#newsTable').DataTable().ajax.reload();
+                })
+                .catch(error => console.error(error));
+        }
+    }
     </script>
 </body>
 
