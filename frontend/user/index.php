@@ -1,6 +1,6 @@
 <?php
 include "header.php";  // Memasukkan header di atas konten
-include "../check_session.php"
+include "../check_session.php";
 ?>
 
 <!DOCTYPE html>
@@ -10,68 +10,63 @@ include "../check_session.php"
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>UtbKos</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
-    <link rel="icon" href="assets/images/logo.ico">
     <link rel="stylesheet" href="../assets/css/styleindexuser.css">
     <link rel="stylesheet" href="../assets/css/stlyefooter.css">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap" rel="stylesheet">
-    <script src="assets/js/scriptsindex.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </head>
 
 <body>
-    <!-- project -->
-    <section id="project">
+
+    <section id="kosan">
         <div class="container">
             <div class="row text-center mb-3">
                 <div class="col">
-                    <h2>My Project</h2>
+                    <h2>Daftar Kosan</h2>
                 </div>
             </div>
-            <div class="row justify-content-center">
-                <div class="col-md-4 mb-3">
-                    <div class="card">
-                        <img src="img/project1.jpeg" class="card-img-top" alt="project1" />
-                        <div class="card-body">
-                            <p class="card-text">
-                                Some quick example text to build on the card title and make up
-                                the bulk of the card's content.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4 mb-3">
-                    <div class="card">
-                        <img src="img/project2.jpeg" class="card-img-top" alt="project1" />
-                        <div class="card-body">
-                            <p class="card-text">
-                                Some quick example text to build on the card title and make up
-                                the bulk of the card's content.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4 mb-3">
-                    <div class="card">
-                        <img src="img/project3.jpg" class="card-img-top" alt="project1" />
-                        <div class="card-body">
-                            <p class="card-text">
-                                Some quick example text to build on the card title and make up
-                                the bulk of the card's content.
-                            </p>
-                        </div>
-                    </div>
-                </div>
+            <div class="row" id="kosList">
+                <!-- Data Kosan Akan Muncul Disini -->
             </div>
         </div>
     </section>
-    <!-- project selesai -->
 
-    <?php
-    include "footer.php";  // Memasukkan footer di akhir body
-    ?>
+    <?php include "footer.php"; ?>
+
+    <script>
+        $(document).ready(function() {
+            axios.get('http://localhost/UtbKosWeb/backend/listkos.php')
+                .then(function(response) {
+                    let kosList = response.data;
+                    let content = '';
+
+                    kosList.forEach(kos => {
+                        content += `
+                            <div class="col-md-4 mb-4">
+                                <div class="card shadow-sm">
+                                    <img src="${kos.img}" class="card-img-top" style="height: 200px; object-fit: cover;">
+                                    <div class="card-body">
+                                        <h5 class="card-title">${kos.namakos}</h5>
+                                        <p class="card-text">${kos.alamatkos}</p>
+                                        <p class="text-muted">Harga: <strong>Rp${kos.hargasewa}</strong></p>
+                                        <p class="text-muted">Fasilitas: ${kos.fasilitas}</p>
+                                        <a href="#" class="btn btn-primary btn-sm">Lihat Detail</a>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                    });
+
+                    $('#kosList').html(content);
+                })
+                .catch(function(error) {
+                    console.error(error);
+                    $('#kosList').html('<p class="text-center">Gagal memuat data kos.</p>');
+                });
+        });
+    </script>
 
 </body>
-
 </html>
