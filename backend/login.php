@@ -1,54 +1,54 @@
 <?php
-include('koneksi.php');
-
-// Set response sebagai JSON
+header("Access-Control-Allow-Origin: *");
 header('Content-Type: application/json');
+include 'koneksi.php';
 
-// Ambil data JSON yang dikirimkan melalui POST
-$data = json_decode(file_get_contents("php://input"), true);
+// Ambil data dari POST
+$email = $_POST["email"] ?? null;
+$password = $_POST["password"] ?? null;
 
-// Cek apakah data ada
-if (isset($data['username_or_email']) && isset($data['password'])) {
-    $username_or_email = $data['username_or_email'];
-    $password = $data['password'];
+if (!empty($email) && !empty($password)) {
+    // Mengambil data pengguna dari database berdasarkan email
+    $statement = $database_connection->prepare("SELECT id, email, password, username FROM users WHERE email = ?");
+    $statement->execute([$email]);
+    $user = $statement->fetch(PDO::FETCH_ASSOC);
 
-    // Validasi jika username/email atau password kosong
-    if (empty($username_or_email)) {
-        echo json_encode(['message' => 'Username atau Email belum diisi!']);
-        exit;
-    }
-
-    if (empty($password)) {
-        echo json_encode(['message' => 'Password belum diisi!']);
-        exit;
-    }
-
-    // Query untuk mencari user berdasarkan username atau email
-    $sql = "SELECT * FROM users WHERE username = :username_or_email OR email = :username_or_email LIMIT 1";
-    $stmt = $database_connection->prepare($sql);
-    $stmt->bindParam(':username_or_email', $username_or_email);
-    $stmt->execute();
-    $user = $stmt->fetch(PDO::FETCH_ASSOC);
-
-    // Jika user ditemukan
-    if ($user) {
-        // Verifikasi password
-        if (password_verify($password, $user['password'])) {
-            // Periksa jika email dan password cocok dengan admin
-            if ($user['email'] === 'admin@gmail.com' && $password === 'adminutbkos') {
-                echo json_encode(['message' => 'Login berhasil sebagai admin!', 'redirect' => 'admin/index.php']);
-            } else {
-                // Login berhasil sebagai user biasa
-                echo json_encode(['message' => 'Login berhasil!', 'redirect' => 'user/index.php']);
-            }
+    // Verifikasi kata sandi
+    if ($user && password_verify($password, $user['password'])) {
+        // Periksa jika pengguna adalah admin
+        if ($user['email'] === 'admin@gmail.com') {
+            echo json_encode([
+                'status' => 'success',
+                'message' => 'Login berhasil sebagai admin!',
+                'redirect' => 'admin/index.php'
+            ]);
         } else {
-            // Password salah
-            echo json_encode(['message' => 'Password salah!']);
+            // Jika pengguna adalah user biasa, buat token sesi baru
+            $session_token = bin2hex(random_bytes(16));
+
+            // Perbarui token sesi di database
+            $updateStatement = $database_connection->prepare("UPDATE users SET session_token = ? WHERE id = ?");
+            $updateStatement->execute([$session_token, $user['id']]);
+
+            // Mengembalikan respons JSON sukses dengan token sesi
+            echo json_encode([
+                'status' => 'success',
+                'message' => 'Login berhasil!',
+                'redirect' => 'user/index.php',
+                'session_token' => $session_token
+            ]);
         }
     } else {
-        // User tidak ditemukan
-        echo json_encode(['message' => 'User atau Email tidak ditemukan!']);
+        // Jika verifikasi gagal, kirim pesan kesalahan
+        echo json_encode([
+            'status' => 'error',
+            'message' => 'Email atau password salah!'
+        ]);
     }
 } else {
-    echo json_encode(['message' => 'Metode tidak diizinkan!']);
+    // Jika permintaan tidak valid, kirim pesan kesalahan
+    echo json_encode([
+        'status' => 'error',
+        'message' => 'Email dan password harus diisi!'
+    ]);
 }

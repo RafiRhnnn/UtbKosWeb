@@ -1,5 +1,6 @@
 <?php
 include "header.php";  // Memasukkan header di atas konten
+include "../check_session.php"
 ?>
 
 <!DOCTYPE html>
