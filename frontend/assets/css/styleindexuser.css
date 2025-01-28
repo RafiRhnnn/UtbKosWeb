@@ -1,10 +1,14 @@
 svg {
-    width: 100%; /* Membuat SVG memenuhi lebar layar */
-    display: block; /* Menghindari space kosong di bawah SVG */
-    margin-top: -1px; /* Mengurangi jarak jika diperlukan */
+    width: 100%;
+    /* Membuat SVG memenuhi lebar layar */
+    display: block;
+    /* Menghindari space kosong di bawah SVG */
+    margin-top: -1px;
+    /* Mengurangi jarak jika diperlukan */
 }
 
-html, body {
+html,
+body {
     height: 100%;
     margin: 0;
 }
@@ -19,4 +23,15 @@ html, body {
 /* Konten utama fleksibel, agar footer tetap di bawah */
 .content {
     flex: 1;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+footer {
+    margin-top: auto;
+    /* Push footer to the bottom */
 }

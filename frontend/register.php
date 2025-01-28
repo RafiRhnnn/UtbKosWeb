@@ -11,7 +11,42 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
     <link rel="icon" href="assets/images/logo.ico">
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="assets/js/scriptsregis.js"></script>
 </head>
+
+<!-- navbar start -->
+<nav class="navbar navbar-expand-lg navbar-light bg-warning sticky-top">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">
+            <img class="logoheader img-fluid" src="assets/images/logo_header.png" alt="Sample image" style="max-height: 60px;">
+            Utbkos
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav mx-auto">
+                <li class="nav-item ms-1">
+                    <a class="nav-link active" aria-current="page" href="#">Home</a>
+                </li>
+                <li class="nav-item mx-3">
+                    <a class="nav-link" href="#about">About</a>
+                </li>
+                <li class="nav-item mx-3">
+                    <a class="nav-link" href="#promo">Promo</a>
+                </li>
+                <li class="nav-item mx-9">
+                    <a class="nav-link" href="#feature">Feature</a>
+                </li>
+                <li class="nav-item mx-9">
+                    <a class="nav-link" href="../frontend/login.php">Login</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- navbar end -->
 
 <body>
     <section class="vh-100">
@@ -86,32 +121,32 @@
     </section>
 
     <script>
-    document.getElementById('registerForm').addEventListener('submit', function(e) {
-        e.preventDefault(); // Mencegah reload halaman
+        document.getElementById('registerForm').addEventListener('submit', function(e) {
+            e.preventDefault(); // Mencegah reload halaman
 
-        // Ambil nilai dari input form
-        const username = document.getElementById('username').value;
-        const email = document.getElementById('email').value;
-        const password = document.getElementById('password').value;
+            // Ambil nilai dari input form
+            const username = document.getElementById('username').value;
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
 
-        // Kirim data menggunakan axios
-        axios.post('http://localhost/UtbKosWeb/backend/daftar.php', {
-                username: username,
-                email: email,
-                password: password
-            })
-            .then(response => {
-                console.log(response.data); // Log respons dari server
-                alert(response.data.message);
-                if (response.data.message === 'Registrasi berhasil!') {
-                    window.location.href = 'login.php'; // Redirect ke login
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error); // Log kesalahan di konsol
-                alert('Terjadi kesalahan. Silakan coba lagi.');
-            });
-    });
+            // Kirim data menggunakan axios
+            axios.post('http://localhost/UtbKosWeb/backend/daftar.php', {
+                    username: username,
+                    email: email,
+                    password: password
+                })
+                .then(response => {
+                    console.log(response.data); // Log respons dari server
+                    alert(response.data.message);
+                    if (response.data.message === 'Registrasi berhasil!') {
+                        window.location.href = 'login.php'; // Redirect ke login
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error); // Log kesalahan di konsol
+                    alert('Terjadi kesalahan. Silakan coba lagi.');
+                });
+        });
     </script>
 </body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"

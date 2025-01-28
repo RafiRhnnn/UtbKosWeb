@@ -16,6 +16,7 @@ include "../check_session.php";
     <link rel="stylesheet" href="../assets/css/stlyefooter.css">
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
 </head>
 
 <body>
@@ -69,4 +70,5 @@ include "../check_session.php";
     </script>
 
 </body>
+
 </html>
