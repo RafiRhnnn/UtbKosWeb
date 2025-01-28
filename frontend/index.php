@@ -17,11 +17,11 @@
 
 <body>
     <!-- navbar start -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-warning sticky-top">
+    <nav class="navbar navbar-expand-lg navbar-light sticky-top">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">
-                <img class="logoheader img-fluid" src="assets/images/logo_header.png" alt="Sample image" style="max-height: 60px;">
-                Utbkos
+            <a class="navbar-brand d-flex align-items-center" href="#">
+                <img class="logoheader img-fluid me-1" src="assets/images/logo_header.png" alt="Sample image" style="max-height: 70px;">
+
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -37,22 +37,24 @@
                     <li class="nav-item mx-3">
                         <a class="nav-link" href="#promo">Promo</a>
                     </li>
-                    <li class="nav-item mx-9">
+                    <li class="nav-item mx-3">
                         <a class="nav-link" href="#feature">Feature</a>
                     </li>
-                    <li class="nav-item mx-9">
-                        <a class="nav-link" href="../frontend/login.php">Login</a>
-                    </li>
                 </ul>
+                <a class="btn btn-outline-dark btn-lg rounded-pill ms-lg-3 px-4 py-2" href="../frontend/login.php">Login</a>
             </div>
+
         </div>
     </nav>
+
+
 
     <!-- navbar end -->
 
     <!-- body mulai -->
 
-    <section class="vh-100 bg-secondary">
+    <section class="gradasi vh-100 ">
+        <div class="overlay"></div>
         <main class="content d-flex justify-content-between align-items-center text-white ps-5 pt-5">
             <div class="d-flex flex-column align-items-start">
                 <h1>NGEKOS LEBIH MURAH & AMAN <span>UTBKOS</span>SOLUSINYA</h1>
@@ -66,7 +68,7 @@
             <div class="d-flex justify-content-end col-md-9 col-lg-6 col-xl-5 text-end" data-aos="flip-right"
                 data-aos-easing="ease-out-cubic"
                 data-aos-duration="2000">
-                <img id="logoutbkos" src="assets/images/logoutbkos.png" class="img-fluid" alt="Sample image">
+                <img id="logoutbkos" src="assets/images/logobaru.png" class="img-fluid" alt="Sample image">
             </div>
         </main>
     </section>

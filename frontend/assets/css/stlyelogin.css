@@ -6,6 +6,12 @@
     background: #eee;
 }
 
+ul {
+    font-size: 1.25rem;
+}
+
+
+
 .h-custom {
     height: calc(100% - 73px);
 }

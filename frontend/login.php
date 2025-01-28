@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="assets/css/stlyelogin.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <link rel="icon" href="assets/images/logo.ico">
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="assets/js/scriptslogin.js"></script>
@@ -16,22 +17,32 @@
 <!-- navbar start -->
 <nav class="navbar navbar-expand-lg navbar-light bg-warning sticky-top">
     <div class="container-fluid">
-        <a class="navbar-brand" href="#">
-            <img class="logoheader img-fluid" src="assets/images/logo_header.png" alt="Sample image" style="max-height: 60px;">
-            Utbkos
+        <a class="navbar-brand d-flex align-items-center" href="#">
+            <img class="logoheader img-fluid me-1" src="assets/images/logo_header.png" alt="Sample image" style="max-height: 70px;">
+
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse">
-            <ul class="navbar-nav mx-auto">
+            <ul class="navbar-nav mx-auto fs-5">
                 <li class="nav-item ms-1">
                     <a class="nav-link active" aria-current="page" href="index.php">Home</a>
+                </li>
+                <li class="nav-item mx-3">
+                    <a class="nav-link" href="index.php">About</a>
+                </li>
+                <li class="nav-item mx-3">
+                    <a class="nav-link" href="index.php">Promo</a>
+                </li>
+                <li class="nav-item mx-3">
+                    <a class="nav-link " href="index.php">Feature</a>
                 </li>
             </ul>
         </div>
     </div>
 </nav>
+
 
 <!-- navbar end -->
 
