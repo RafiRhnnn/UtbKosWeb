@@ -54,7 +54,7 @@ include "../check_session.php";
                                         <p class="text-muted">Harga: <strong>Rp${kos.hargasewa}</strong></p>
                                         <p class="text-muted">tipe: ${kos.tipe}</p>
                                         <p class="text-muted">Fasilitas: ${kos.fasilitas}</p>
-                                        <a href="#" class="btn btn-primary btn-sm">Lihat Detail</a>
+                                        <a href="detailkost.php?id=${kos.id}" class="btn btn-primary btn-sm">Lihat Detail</a>
                                     </div>
                                 </div>
                             </div>
