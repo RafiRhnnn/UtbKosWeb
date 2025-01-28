@@ -6,7 +6,7 @@ $database_name = "utbkos";
 
 try {
     $database_connection = new PDO("mysql:host=$database_hostname;dbname=$database_name", $database_user, $database_password);
-    //echo "Koneksi Berhasil";
+    // echo "Koneksi Berhasil"; // Uncomment jika perlu debugging
 } catch (PDOException $cek_koneksi) {
-    die($cek_koneksi->getMessage());
+    die($cek_koneksi->getMessage()); // Tetap tampilkan error untuk debugging
 }

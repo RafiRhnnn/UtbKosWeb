@@ -9,6 +9,7 @@
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="style.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </head>
 
 <body>
@@ -28,8 +29,8 @@
                 <div class="col-md-3">
                     <div class="card text-white bg-success mb-3">
                         <div class="card-body">
-                            <h5 class="card-title">Revenue</h5>
-                            <p class="card-text">$95k <small class="text-light">+12%</small></p>
+                            <h5 class="card-title">Jumlah Kosan</h5>
+                            <p id="jumlah-kosan" class="card-text">Memuat... <small class="text-light">kosan</small></p>
                         </div>
                     </div>
                 </div>
@@ -50,32 +51,31 @@
         </div>
     </div>
 
-
     <script>
-    // Chart.js Example
-    const ctx = document.getElementById('profitChart').getContext('2d');
-    const profitChart = new Chart(ctx, {
-        type: 'bar',
-        data: {
-            labels: ['January', 'February', 'March', 'April', 'May'],
-            datasets: [{
-                label: 'Total Profit',
-                data: [12000, 15000, 17000, 14000, 20000],
-                backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                borderColor: 'rgba(75, 192, 192, 1)',
-                borderWidth: 1
-            }]
-        },
-        options: {
-            responsive: true,
-            plugins: {
-                legend: {
-                    display: true,
-                    position: 'top'
+        // Fungsi untuk mengambil jumlah kosan dari backend
+        async function fetchJumlahKosan() {
+            try {
+                // Panggil backend menggunakan Axios
+                const response = await axios.get('http://localhost/UtbKosWeb/backend/jumlahkos.php');
+                const data = response.data;
+
+                // Periksa apakah respons sukses
+                if (data.status === 'success') {
+                    // Update jumlah kosan di halaman
+                    document.getElementById('jumlah-kosan').innerHTML = `${data.jumlah_kos} <small class="text-light">kosan</small>`;
+                } else {
+                    // Tampilkan pesan error jika gagal
+                    document.getElementById('jumlah-kosan').innerHTML = `Error: ${data.message}`;
                 }
+            } catch (error) {
+                // Tampilkan pesan error jika terjadi masalah koneksi
+                document.getElementById('jumlah-kosan').innerHTML = 'Error: Gagal memuat data';
+                console.error(error);
             }
         }
-    });
+
+        // Panggil fungsi saat halaman dimuat
+        fetchJumlahKosan();
     </script>
 </body>
 
