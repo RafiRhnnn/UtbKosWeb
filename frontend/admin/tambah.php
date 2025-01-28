@@ -39,6 +39,16 @@
                             <input type="text" id="hargasewa" name="hargasewa" class="form-control" maxlength="50" required>
                         </div>
                         <div class="mb-3">
+                            <label for="tipe" class="form-label">Tipe:</label>
+                            <select id="tipe" name="tipe" class="form-control" required>
+                                <option value="" disabled selected>Pilih Tipe</option>
+                                <option value="perempuan">Perempuan</option>
+                                <option value="laki-laki">Laki-laki</option>
+                                <option value="campur">Campur</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
                             <label for="fasilitas" class="form-label">Fasilitas:</label>
                             <textarea rows="3" class="form-control" id="fasilitas" name="fasilitas" required></textarea>
                         </div>
@@ -67,6 +77,7 @@
             const namakos = document.getElementById('namakos').value;
             const alamatkos = document.getElementById('alamatkos').value;
             const hargasewa = document.getElementById('hargasewa').value;
+            const tipe = document.getElementById('tipe').value;
             const fasilitas = document.getElementById('fasilitas').value;
             const urlImageInput = document.getElementById('url_image');
             const url_image = urlImageInput.files[0];
@@ -77,6 +88,7 @@
             formData.append('namakos', namakos);
             formData.append('alamatkos', alamatkos);
             formData.append('hargasewa', hargasewa);
+            formData.append('tipe', tipe);
             formData.append('fasilitas', fasilitas);
             formData.append('url_image', url_image); // Menambahkan file gambar
             formData.append('date', date);

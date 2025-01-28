@@ -34,6 +34,7 @@
                         <th>Nama Kost</th>
                         <th>Alamat Kost</th>
                         <th>Harga Sewa</th>
+                        <th>Tipe</th>
                         <th>Fasilitas</th>
                         <th>Image</th>
                         <th>Actions</th>
@@ -45,84 +46,85 @@
     </div>
 
     <script>
-    $(document).ready(function() {
-        // Initialize DataTable
-        $('#newsTable').DataTable({
-            'processing': true,
-            'serverSide': true,
-            'ajax': function(data, callback) {
-                axios.get('http://localhost/UtbKosWeb/backend/listkos.php', {
-                    params: {
-                        key: data.search.value
-                    }
-                }).then(function(response) {
-                    response.data.forEach(function(row, index) {
-                        row.no = index + 1;
+        $(document).ready(function() {
+            // Initialize DataTable
+            $('#newsTable').DataTable({
+                'processing': true,
+                'serverSide': true,
+                'ajax': function(data, callback) {
+                    axios.get('http://localhost/UtbKosWeb/backend/listkos.php', {
+                        params: {
+                            key: data.search.value
+                        }
+                    }).then(function(response) {
+                        response.data.forEach(function(row, index) {
+                            row.no = index + 1;
+                        });
+                        callback({
+                            draw: data.draw,
+                            recordsTotal: response.data.length,
+                            recordsFiltered: response.data.length,
+                            data: response.data
+                        });
+                    }).catch(function(error) {
+                        console.error(error);
+                        alert('Error fetching data.');
                     });
-                    callback({
-                        draw: data.draw,
-                        recordsTotal: response.data.length,
-                        recordsFiltered: response.data.length,
-                        data: response.data
-                    });
-                }).catch(function(error) {
-                    console.error(error);
-                    alert('Error fetching data.');
-                });
-            },
-            'columns': [{
-                    'data': 'no'
                 },
-                {
-                    'data': 'namakos'
-                },
-                {
-                    'data': 'alamatkos'
-                },
-                {
-                    'data': 'hargasewa'
-                },
-                {
-                    'data': 'fasilitas'
-                },
-                {
-                    'data': 'img',
-                    'render': function(data) {
-                        return `<img src="${data}" style="max-width: 100px; max-height: 100px;">`;
+                'columns': [{
+                        'data': 'no'
+                    },
+                    {
+                        'data': 'namakos'
+                    },
+                    {
+                        'data': 'alamatkos'
+                    },
+                    {
+                        'data': 'hargasewa'
+                    },
+                    {
+                        'data': 'tipe'
+                    }, // Menampilkan tipe kos
+                    {
+                        'data': 'fasilitas'
+                    },
+                    {
+                        'data': 'img',
+                        'render': function(data) {
+                            return `<img src="${data}" style="max-width: 100px; max-height: 100px;">`;
+                        }
+                    },
+                    {
+                        "data": null,
+                        "render": function(data, type, row) {
+                            return '<button class="btn btn-danger btn-sm" onclick="deletekos(' + row.id + ')">Delete</button>' +
+                                '<form action="editkos.php" method="post" style="display:inline;">' +
+                                '<input type="hidden" name="id" value="' + row.id + '">' +
+                                '<button type="submit" class="btn btn-primary btn-sm">Edit</button>' +
+                                '</form>';
+                        }
                     }
-                },
-                {
-                    "data": null,
-                    "render": function(data, type, row) {
-                        return '<button class="btn btn-danger btn-sm" onclick="deletekos(' +
-                            row
-                            .id + ')">Delete</button>' +
-                            '<form action="editkos.php" method="post">' +
-                            '<input type="hidden" name="id" value="' + row.id + '">' +
-                            '<button type="submit" class="btn btn-primary btn-sm">Edit</button>'
-                        '</form>';
-                    }
-                }
-            ]
+                ]
+            });
         });
-    });
 
-    function deletekos(id) {
-        var formData = new FormData();
-        formData.append('idkos', id);
+        function deletekos(id) {
+            var formData = new FormData();
+            formData.append('idkos', id);
 
-        if (confirm("Are you sure you want to delete this news?")) {
-            axios.post('http://localhost/UtbKosWeb/backend/deletekos.php', formData)
-                .then(function(response) {
-                    alert(response.data.message || 'News deleted successfully!');
-                    $('#newsTable').DataTable().ajax.reload();
-                })
-                .catch(function(error) {
-                    console.error(error);
-                    alert('Error deleting news.');
-                });
+            if (confirm("Are you sure you want to delete this kos?")) {
+                axios.post('http://localhost/UtbKosWeb/backend/deletekos.php', formData)
+                    .then(function(response) {
+                        alert(response.data.message || 'Kos deleted successfully!');
+                        $('#newsTable').DataTable().ajax.reload();
+                    })
+                    .catch(function(error) {
+                        console.error(error);
+                        alert('Error deleting kos.');
+                    });
+            }
         }
-    }
     </script>
 </body>
 

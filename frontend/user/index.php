@@ -52,6 +52,7 @@ include "../check_session.php";
                                         <h5 class="card-title">${kos.namakos}</h5>
                                         <p class="card-text">${kos.alamatkos}</p>
                                         <p class="text-muted">Harga: <strong>Rp${kos.hargasewa}</strong></p>
+                                        <p class="text-muted">tipe: ${kos.tipe}</p>
                                         <p class="text-muted">Fasilitas: ${kos.fasilitas}</p>
                                         <a href="#" class="btn btn-primary btn-sm">Lihat Detail</a>
                                     </div>
