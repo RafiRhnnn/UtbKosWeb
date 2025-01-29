@@ -6,14 +6,17 @@
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
      <title>Dashboard</title>
      <link rel="icon" href="../assets/images/logo.ico">
+     <link rel="stylesheet" href="../assets/css/headeruser.css">
  </head>
 
  <body>
 
      <!-- navbar start -->
-     <nav class="navbar navbar-expand-lg navbar-light bg-warning sticky-top">
+     <nav class="navbar navbar-expand-lg navbar-light sticky-top">
          <div class="container-fluid">
-             <a class="navbar-brand" href="#">Utbkos</a>
+             <a class="navbar-brand d-flex align-items-center" href="#">
+                 <img class="logoheader img-fluid me-1" src="../assets/images/logo_header.png" alt="Sample image" style="max-height: 70px;">
+             </a>
              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
                  aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                  <span class="navbar-toggler-icon"></span>

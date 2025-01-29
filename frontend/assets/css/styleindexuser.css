@@ -23,13 +23,19 @@ body {
 /* Konten utama fleksibel, agar footer tetap di bawah */
 .content {
     flex: 1;
+
 }
 
 body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+    background: linear-gradient(to bottom, #B7D7C9, #04616E);
+    background-size: 100% 200vh;
+    /* 2x tinggi viewport */
+    background-repeat: no-repeat;
 }
+
 
 footer {
     margin-top: auto;

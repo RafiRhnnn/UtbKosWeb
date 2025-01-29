@@ -23,7 +23,7 @@ include "../check_session.php";
 <body>
 
     <section id="kosan">
-        <div class="container">
+        <div class="container mt-5">
             <div class="row text-center mb-3">
                 <div class="col">
                     <h2>Daftar Kosan</h2>
