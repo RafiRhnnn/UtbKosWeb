@@ -2,6 +2,7 @@
     style="width: 280px; height: 100vh; position: fixed; top: 0; left: 0;">
     <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
         <span class="fs-4">Dashboard</span>
+
     </a>
     <hr>
     <ul class="nav nav-pills flex-column mb-auto">
@@ -32,6 +33,12 @@
             <a href="pesanan.php"
                 class="nav-link text-white <?php echo $current_page == 'pesanan.php' ? 'active' : ''; ?>">
                 Pesanan
+            </a>
+        </li>
+        <li>
+            <a href="tambahfiture.php"
+                class="nav-link text-white <?php echo $current_page == 'tambahfiture.php' ? 'active' : ''; ?>">
+                Tambah Fiture
             </a>
         </li>
         <li>
