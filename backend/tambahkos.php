@@ -9,6 +9,7 @@ $namakos = $_POST["namakos"];
 $alamatkos = $_POST["alamatkos"];
 $hargasewa = $_POST["hargasewa"];
 $tipe = $_POST["tipe"];
+$notelp = $_POST["notelp"];
 $fasilitas = $_POST["fasilitas"];
 $date = $_POST["date"];
 
@@ -21,12 +22,12 @@ try {
 
     // Query SQL
     $statement = $database_connection->prepare(
-        "INSERT INTO `tambah_kost` (`namakos`, `alamatkos`, `hargasewa`, `tipe`, `fasilitas`, `img`, `date`) 
-        VALUES (?, ?, ?, ?, ?, ?, ?)"
+        "INSERT INTO `tambah_kost` (`namakos`, `alamatkos`, `hargasewa`, `tipe`, `notelp`, `fasilitas`, `img`, `date`) 
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?)"
     );
 
     // Eksekusi query
-    $statement->execute([$namakos, $alamatkos, $hargasewa, $tipe, $fasilitas, 'archive/' . $namafile, $date]);
+    $statement->execute([$namakos, $alamatkos, $hargasewa, $tipe, $notelp, $fasilitas, 'archive/' . $namafile, $date]);
 
     // Pesan sukses
     $pesan = "Data berhasil ditambah";

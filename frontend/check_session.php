@@ -13,7 +13,7 @@ function checkSession() {
                 localStorage.setItem('email', email);
             } else {
 
-                window.location.href = 'login.php';
+                window.location.href = '../login.php';
             }
         })
         .catch(error => {

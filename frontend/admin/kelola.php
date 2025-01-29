@@ -35,6 +35,7 @@
                         <th>Alamat Kost</th>
                         <th>Harga Sewa</th>
                         <th>Tipe</th>
+                        <th>No Telepone</th>
                         <th>Fasilitas</th>
                         <th>Image</th>
                         <th>Actions</th>
@@ -87,6 +88,9 @@
                         'data': 'tipe'
                     }, // Menampilkan tipe kos
                     {
+                        'data': 'notelp'
+                    },
+                    {
                         'data': 'fasilitas'
                     },
                     {
@@ -98,7 +102,8 @@
                     {
                         "data": null,
                         "render": function(data, type, row) {
-                            return '<button class="btn btn-danger btn-sm" onclick="deletekos(' + row.id + ')">Delete</button>' +
+                            return '<button class="btn btn-danger btn-sm" onclick="deletekos(' + row
+                                .id + ')">Delete</button>' +
                                 '<form action="editkos.php" method="post" style="display:inline;">' +
                                 '<input type="hidden" name="id" value="' + row.id + '">' +
                                 '<button type="submit" class="btn btn-primary btn-sm">Edit</button>' +

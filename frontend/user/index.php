@@ -37,14 +37,14 @@ include "../check_session.php";
     <?php include "footer.php"; ?>
 
     <script>
-        $(document).ready(function() {
-            axios.get('http://localhost/UtbKosWeb/backend/listkos.php')
-                .then(function(response) {
-                    let kosList = response.data;
-                    let content = '';
+    $(document).ready(function() {
+        axios.get('http://localhost/UtbKosWeb/backend/listkos.php')
+            .then(function(response) {
+                let kosList = response.data;
+                let content = '';
 
-                    kosList.forEach(kos => {
-                        content += `
+                kosList.forEach(kos => {
+                    content += `
                             <div class="col-md-4 mb-4">
                                 <div class="card shadow-sm">
                                     <img src="${kos.img}" class="card-img-top" style="height: 200px; object-fit: cover;">
@@ -52,22 +52,21 @@ include "../check_session.php";
                                         <h5 class="card-title">${kos.namakos}</h5>
                                         <p class="card-text">${kos.alamatkos}</p>
                                         <p class="text-muted">Harga: <strong>Rp${kos.hargasewa}</strong></p>
-                                        <p class="text-muted">tipe: ${kos.tipe}</p>
                                         <p class="text-muted">Fasilitas: ${kos.fasilitas}</p>
                                         <a href="detailkost.php?id=${kos.id}" class="btn btn-primary btn-sm">Lihat Detail</a>
                                     </div>
                                 </div>
                             </div>
                         `;
-                    });
-
-                    $('#kosList').html(content);
-                })
-                .catch(function(error) {
-                    console.error(error);
-                    $('#kosList').html('<p class="text-center">Gagal memuat data kos.</p>');
                 });
-        });
+
+                $('#kosList').html(content);
+            })
+            .catch(function(error) {
+                console.error(error);
+                $('#kosList').html('<p class="text-center">Gagal memuat data kos.</p>');
+            });
+    });
     </script>
 
 </body>

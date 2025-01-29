@@ -5,6 +5,7 @@ include "../check_session.php";
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,6 +14,7 @@ include "../check_session.php";
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../assets/css/styledetailkost.css">
 </head>
+
 <body>
     <div class="container main-content py-5" id="detailKost">
         <!-- Konten akan diisi oleh JavaScript -->
@@ -54,7 +56,7 @@ include "../check_session.php";
                                 <h5>Alamat:</h5>
                                 <p>${kost.alamatkos}</p>
                             </div>
-                            <a href="https://wa.me/${kost.nomor_whatsapp}" 
+                            <a href="https://api.whatsapp.com/send?phone=${kost.notelp}" 
                                class="btn btn-success btn-lg w-100 mb-3" 
                                target="_blank">
                                 <i class="fab fa-whatsapp"></i> Hubungi via WhatsApp
@@ -96,4 +98,5 @@ include "../check_session.php";
         });
     </script>
 </body>
+
 </html>

@@ -10,23 +10,33 @@
         $current_page = basename($_SERVER['PHP_SELF']);
         ?>
         <li class="nav-item">
-            <a href="dashboard.php" class="nav-link text-white <?php echo $current_page == 'dashboard.php' ? 'active' : ''; ?>" aria-current="page">
+            <a href="dashboard.php"
+                class="nav-link text-white <?php echo $current_page == 'dashboard.php' ? 'active' : ''; ?>"
+                aria-current="page">
                 Dashboard
             </a>
         </li>
         <li>
-            <a href="kelola.php" class="nav-link text-white <?php echo $current_page == 'kelola.php' ? 'active' : ''; ?>">
+            <a href="kelola.php"
+                class="nav-link text-white <?php echo $current_page == 'kelola.php' ? 'active' : ''; ?>">
                 Kelola
             </a>
         </li>
         <li>
-            <a href="tambah.php" class="nav-link text-white <?php echo $current_page == 'tambah.php' ? 'active' : ''; ?>">
+            <a href="tambah.php"
+                class="nav-link text-white <?php echo $current_page == 'tambah.php' ? 'active' : ''; ?>">
                 Tambah kost
             </a>
         </li>
         <li>
-            <a href="pesanan.php" class="nav-link text-white <?php echo $current_page == 'pesanan.php' ? 'active' : ''; ?>">
+            <a href="pesanan.php"
+                class="nav-link text-white <?php echo $current_page == 'pesanan.php' ? 'active' : ''; ?>">
                 Pesanan
+            </a>
+        </li>
+        <li>
+            <a href="../login.php" class="nav-link text-white">
+                logout
             </a>
         </li>
     </ul>
@@ -35,9 +45,7 @@
         <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle"
             data-bs-toggle="dropdown" aria-expanded="false">
             <strong>selamat datang admin</strong>
+
         </a>
-        <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
-            <li><a class="dropdown-item" href="logout.php">Sign out</a></li>
-        </ul>
     </div>
 </div>
