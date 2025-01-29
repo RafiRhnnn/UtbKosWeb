@@ -38,6 +38,7 @@
                         <th>Tipe</th>
                         <th>No Telepone</th>
                         <th>Fasilitas</th>
+                        <th>Detail kos</th>
                         <th>Image</th>
                         <th>Actions</th>
                     </tr>
@@ -87,12 +88,15 @@
                     },
                     {
                         'data': 'tipe'
-                    }, // Menampilkan tipe kos
+                    }, 
                     {
                         'data': 'notelp'
                     },
                     {
                         'data': 'fasilitas'
+                    },
+                    {
+                        'data': 'detailkost'
                     },
                     {
                         'data': 'img',

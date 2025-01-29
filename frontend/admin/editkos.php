@@ -49,6 +49,10 @@ $id = isset($_POST['id']) ? $_POST['id'] : null;
                 <textarea id="fasilitas" name="fasilitas" class="form-control" rows="3" required></textarea>
             </div>
             <div class="mb-3">
+                <label for="detailkost" class="form-label">Detail Kost:</label>
+                <textarea id="detailkost" name="detailkost" class="form-control" rows="3" required></textarea>
+            </div>
+            <div class="mb-3">
                 <label for="url_image" class="form-label">Foto Kosan:</label>
                 <input type="file" id="url_image" name="url_image" class="form-control" accept="image/*">
             </div>
@@ -74,6 +78,7 @@ $id = isset($_POST['id']) ? $_POST['id'] : null;
                     document.getElementById('tipe').value = response.data.tipe;
                     document.getElementById('notelp').value = response.data.notelp;
                     document.getElementById('fasilitas').value = response.data.fasilitas;
+                    document.getElementById('detailkost').value = response.data.detailkost;
                 }
             })
             .catch(error => {
@@ -90,6 +95,7 @@ $id = isset($_POST['id']) ? $_POST['id'] : null;
         const tipe = document.getElementById('tipe').value;
         const notelp = document.getElementById('notelp').value;
         const fasilitas = document.getElementById('fasilitas').value;
+        const detailkost = document.getElementById('detailkost').value;
         const urlImageInput = document.getElementById('url_image');
         const url_image = urlImageInput.files[0];
         const date = new Date().toISOString().split('T')[0];
@@ -102,6 +108,7 @@ $id = isset($_POST['id']) ? $_POST['id'] : null;
         formData.append('tipe', tipe);
         formData.append('notelp', notelp);
         formData.append('fasilitas', fasilitas);
+        formData.append('detailkost', detailkost);
         formData.append('date', date);
 
         if (urlImageInput.files.length > 0) {
