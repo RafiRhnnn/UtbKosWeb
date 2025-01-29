@@ -21,7 +21,7 @@
 
         <!-- Konten Utama -->
         <div class="container mt-5">
-            <h2 class="mb-4">List News</h2>
+            <h2 class="mb-4">Pesanan</h2>
 
             <table id="newsTable" class="table table-striped">
                 <thead>

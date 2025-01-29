@@ -11,8 +11,8 @@ $hargasewa = $_POST["hargasewa"];
 $tipe = $_POST["tipe"];
 $notelp = $_POST["notelp"];
 $fasilitas = $_POST["fasilitas"];
+$detailkost = $_POST["detailkost"];
 $date = $_POST["date"];
-
 $namafile = $_FILES['url_image']['name'];
 $tmp_name = $_FILES['url_image']['tmp_name'];
 
@@ -22,12 +22,12 @@ try {
 
     // Query SQL
     $statement = $database_connection->prepare(
-        "INSERT INTO `tambah_kost` (`namakos`, `alamatkos`, `hargasewa`, `tipe`, `notelp`, `fasilitas`, `img`, `date`) 
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?)"
+        "INSERT INTO tambah_kost (namakos, alamatkos, hargasewa, tipe, notelp, fasilitas, detailkost, img, date) 
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)"
     );
 
     // Eksekusi query
-    $statement->execute([$namakos, $alamatkos, $hargasewa, $tipe, $notelp, $fasilitas, 'archive/' . $namafile, $date]);
+    $statement->execute([$namakos, $alamatkos, $hargasewa, $tipe, $notelp, $fasilitas, $detailkost, 'archive/' . $namafile, $date]);
 
     // Pesan sukses
     $pesan = "Data berhasil ditambah";
