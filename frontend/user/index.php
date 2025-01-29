@@ -12,6 +12,7 @@ include "../check_session.php";
     <title>UtbKos</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <link rel="icon" href="assets/images/logo.ico">
     <link rel="stylesheet" href="../assets/css/styleindexuser.css">
     <link rel="stylesheet" href="../assets/css/stlyefooter.css">
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
@@ -37,14 +38,14 @@ include "../check_session.php";
     <?php include "footer.php"; ?>
 
     <script>
-    $(document).ready(function() {
-        axios.get('http://localhost/UtbKosWeb/backend/listkos.php')
-            .then(function(response) {
-                let kosList = response.data;
-                let content = '';
+        $(document).ready(function() {
+            axios.get('http://localhost/UtbKosWeb/backend/listkos.php')
+                .then(function(response) {
+                    let kosList = response.data;
+                    let content = '';
 
-                kosList.forEach(kos => {
-                    content += `
+                    kosList.forEach(kos => {
+                        content += `
                             <div class="col-md-4 mb-4">
                                 <div class="card shadow-sm">
                                     <img src="${kos.img}" class="card-img-top" style="height: 200px; object-fit: cover;">
@@ -58,15 +59,15 @@ include "../check_session.php";
                                 </div>
                             </div>
                         `;
-                });
+                    });
 
-                $('#kosList').html(content);
-            })
-            .catch(function(error) {
-                console.error(error);
-                $('#kosList').html('<p class="text-center">Gagal memuat data kos.</p>');
-            });
-    });
+                    $('#kosList').html(content);
+                })
+                .catch(function(error) {
+                    console.error(error);
+                    $('#kosList').html('<p class="text-center">Gagal memuat data kos.</p>');
+                });
+        });
     </script>
 
 </body>

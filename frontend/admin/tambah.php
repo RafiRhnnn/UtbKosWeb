@@ -8,6 +8,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="../assets/images/logo.ico">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
@@ -73,57 +74,57 @@
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
     <script>
-    function addNews() {
-        // Ambil nilai dari form
-        const namakos = document.getElementById('namakos').value;
-        const alamatkos = document.getElementById('alamatkos').value;
-        const hargasewa = document.getElementById('hargasewa').value;
-        const tipe = document.getElementById('tipe').value;
-        const notelp = document.getElementById('notelp').value;
-        const fasilitas = document.getElementById('fasilitas').value;
-        const urlImageInput = document.getElementById('url_image');
-        const url_image = urlImageInput.files[0];
-        const date = new Date().toISOString().split('T')[0]; // Format tanggal menjadi YYYY-MM-DD
+        function addNews() {
+            // Ambil nilai dari form
+            const namakos = document.getElementById('namakos').value;
+            const alamatkos = document.getElementById('alamatkos').value;
+            const hargasewa = document.getElementById('hargasewa').value;
+            const tipe = document.getElementById('tipe').value;
+            const notelp = document.getElementById('notelp').value;
+            const fasilitas = document.getElementById('fasilitas').value;
+            const urlImageInput = document.getElementById('url_image');
+            const url_image = urlImageInput.files[0];
+            const date = new Date().toISOString().split('T')[0]; // Format tanggal menjadi YYYY-MM-DD
 
-        // Buat objek FormData
-        var formData = new FormData();
-        formData.append('namakos', namakos);
-        formData.append('alamatkos', alamatkos);
-        formData.append('hargasewa', hargasewa);
-        formData.append('tipe', tipe);
-        formData.append('notelp', notelp);
-        formData.append('fasilitas', fasilitas);
-        formData.append('url_image', url_image); // Menambahkan file gambar
-        formData.append('date', date);
+            // Buat objek FormData
+            var formData = new FormData();
+            formData.append('namakos', namakos);
+            formData.append('alamatkos', alamatkos);
+            formData.append('hargasewa', hargasewa);
+            formData.append('tipe', tipe);
+            formData.append('notelp', notelp);
+            formData.append('fasilitas', fasilitas);
+            formData.append('url_image', url_image); // Menambahkan file gambar
+            formData.append('date', date);
 
-        // Mengirimkan request POST menggunakan Axios
-        axios
-            .post('http://localhost/UtbKosWeb/backend/tambahkos.php', formData, {
-                headers: {
-                    'Content-Type': 'multipart/form-data',
-                },
-            })
-            .then(function(response) {
-                console.log('Response:', response.data); // Menampilkan respons dari server
-                alert('Kosan berhasil ditambahkan!');
-                document.getElementById('addNewsForm').reset(); // Reset form setelah sukses
-            })
-            .catch(function(error) {
-                // Menangani error
-                if (error.response) {
-                    console.error('Response data:', error.response.data);
-                    console.error('Status:', error.response.status);
-                    console.error('Headers:', error.response.headers);
-                    alert(`Error: ${error.response.data}\nStatus Code: ${error.response.status}`);
-                } else if (error.request) {
-                    console.error('Request:', error.request);
-                    alert('Server tidak memberikan respon. Silakan periksa koneksi atau konfigurasi server.');
-                } else {
-                    console.error('Error message:', error.message);
-                    alert(`Kesalahan dalam pengaturan permintaan: ${error.message}`);
-                }
-            });
-    }
+            // Mengirimkan request POST menggunakan Axios
+            axios
+                .post('http://localhost/UtbKosWeb/backend/tambahkos.php', formData, {
+                    headers: {
+                        'Content-Type': 'multipart/form-data',
+                    },
+                })
+                .then(function(response) {
+                    console.log('Response:', response.data); // Menampilkan respons dari server
+                    alert('Kosan berhasil ditambahkan!');
+                    document.getElementById('addNewsForm').reset(); // Reset form setelah sukses
+                })
+                .catch(function(error) {
+                    // Menangani error
+                    if (error.response) {
+                        console.error('Response data:', error.response.data);
+                        console.error('Status:', error.response.status);
+                        console.error('Headers:', error.response.headers);
+                        alert(`Error: ${error.response.data}\nStatus Code: ${error.response.status}`);
+                    } else if (error.request) {
+                        console.error('Request:', error.request);
+                        alert('Server tidak memberikan respon. Silakan periksa koneksi atau konfigurasi server.');
+                    } else {
+                        console.error('Error message:', error.message);
+                        alert(`Kesalahan dalam pengaturan permintaan: ${error.message}`);
+                    }
+                });
+        }
     </script>
 
 </body>

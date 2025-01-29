@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
-    <link rel="stylesheet" href="assets/css/stlyelogin.css">
+    <link rel="stylesheet" href="assets/css/login.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
@@ -14,8 +14,10 @@
     <script src="assets/js/scriptslogin.js"></script>
 </head>
 
+
+
 <!-- navbar start -->
-<nav class="navbar navbar-expand-lg navbar-light bg-warning sticky-top">
+<nav class="navbar navbar-expand-lg navbar-light sticky-top">
     <div class="container-fluid">
         <a class="navbar-brand d-flex align-items-center" href="#">
             <img class="logoheader img-fluid me-1" src="assets/images/logo_header.png" alt="Sample image" style="max-height: 70px;">
@@ -47,11 +49,12 @@
 <!-- navbar end -->
 
 <body>
-    <section class="vh-100">
+    <section class="gradasi vh-100">
+        <div class="overlay"></div>
         <div class="container-fluid h-custom">
             <div class="row d-flex justify-content-center align-items-center h-100">
                 <div class="col-md-9 col-lg-6 col-xl-5">
-                    <img id="logoutbkos" src="assets/images/logoutbkos.png" class="img-fluid" alt="Sample image">
+                    <img id="logoutbkos" src="assets/images/logobaru.png" class="img-fluid" alt="Sample image">
                 </div>
                 <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
                     <div class="card shadow-lg" style="width: 24rem; margin: auto;">
@@ -81,31 +84,9 @@
                 </div>
             </div>
         </div>
-        <div
-            class="d-flex flex-column flex-md-row text-center text-md-start justify-content-between py-4 px-4 px-xl-5 bg-primary">
-            <!-- Copyright -->
-            <div class="text-white mb-3 mb-md-0">
-                Copyright © 2020. All rights reserved.
-            </div>
-            <!-- Copyright -->
-
-            <!-- Right -->
-            <div>
-                <a href="#" class="text-white me-4">
-                    <i class="fab fa-facebook-f"></i>
-                </a>
-                <a href="#" class="text-white me-4">
-                    <i class="fab fa-twitter"></i>
-                </a>
-                <a href="#" class="text-white me-4">
-                    <i class="fab fa-google"></i>
-                </a>
-                <a href="#" class="text-white">
-                    <i class="fab fa-linkedin-in"></i>
-                </a>
-            </div>
-            <!-- Right -->
-        </div>
+        <footer class="bg-dark text-white text-center py-2">
+            <p>&copy; 2025 Utbkos. All rights reserved.</p>
+        </footer>
     </section>
 
     <script>
