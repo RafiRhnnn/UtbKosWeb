@@ -20,7 +20,7 @@
         <li>
             <a href="kelola.php"
                 class="nav-link text-white <?php echo $current_page == 'kelola.php' ? 'active' : ''; ?>">
-                Kelola
+                Kelola kost
             </a>
         </li>
         <li>
@@ -35,10 +35,17 @@
                 Pesanan
             </a>
         </li>
+
         <li>
             <a href="tambahfiture.php"
                 class="nav-link text-white <?php echo $current_page == 'tambahfiture.php' ? 'active' : ''; ?>">
                 Tambah Fiture
+            </a>
+        </li>
+        <li>
+            <a href="kelolafitur.php"
+                class="nav-link text-white <?php echo $current_page == 'kelolafitur.php' ? 'active' : ''; ?>">
+                Kelola Fiture
             </a>
         </li>
         <li>
