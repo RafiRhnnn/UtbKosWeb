@@ -13,7 +13,7 @@ if (!$session_token) {
 }
 
 try {
-    $stmt = $database_connection->prepare("SELECT username, email FROM users WHERE session_token = ?");
+    $stmt = $database_connection->prepare("SELECT username, email, nama_depan, nama_belakang, notelp  FROM users WHERE session_token = ?");
     $stmt->execute([$session_token]);
     $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
@@ -25,4 +25,3 @@ try {
 } catch (Exception $e) {
     echo json_encode(['status' => 'error', 'message' => 'Terjadi kesalahan: ' . $e->getMessage()]);
 }
-?>
