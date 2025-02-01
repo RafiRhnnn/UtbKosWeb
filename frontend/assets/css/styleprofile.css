@@ -1,0 +1,48 @@
+.profile-card {
+    max-width: 600px;
+    margin: 0 auto;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.card-header {
+    font-size: 4rem;
+    /* Sesuaikan ukuran sesuai kebutuhan */
+}
+
+.profile-card .card-header {
+    background-color: #007bff;
+    color: white;
+    border-radius: 10px 10px 0 0;
+}
+
+.profile-card .card-body {
+    padding: 20px;
+}
+
+.profile-card .form-label {
+    min-width: 120px;
+    font-weight: bold;
+    margin-bottom: 0;
+}
+
+.profile-card .card-text {
+    flex-grow: 1;
+    margin-bottom: 0;
+    padding-left: 10px;
+}
+
+.profile-card .btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+    margin-top: 20px;
+}
+
+.profile-card .btn-primary:hover {
+    background-color: #0056b3;
+    border-color: #0056b3;
+}
+
+.profile-card .text-red {
+    color: red;
+}

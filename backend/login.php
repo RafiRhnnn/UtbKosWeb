@@ -1,4 +1,5 @@
 <?php
+session_start(); // Mulai session
 header("Access-Control-Allow-Origin: *");
 header('Content-Type: application/json');
 include 'koneksi.php';
@@ -17,6 +18,7 @@ if (!empty($email) && !empty($password)) {
     if ($user && password_verify($password, $user['password'])) {
         // Periksa jika pengguna adalah admin
         if ($user['email'] === 'admin@gmail.com') {
+            $_SESSION['username'] = $user['username']; // Simpan username di session
             echo json_encode([
                 'status' => 'success',
                 'message' => 'Login berhasil sebagai admin!',
@@ -29,6 +31,9 @@ if (!empty($email) && !empty($password)) {
             // Perbarui token sesi di database
             $updateStatement = $database_connection->prepare("UPDATE users SET session_token = ? WHERE id = ?");
             $updateStatement->execute([$session_token, $user['id']]);
+
+            // Simpan username di session
+            $_SESSION['username'] = $user['username'];
 
             // Mengembalikan respons JSON sukses dengan token sesi
             echo json_encode([

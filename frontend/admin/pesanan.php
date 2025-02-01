@@ -48,20 +48,20 @@
     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
     <script src="../assets/js/scriptstambah.js"></script>
     <script>
-    document.addEventListener("DOMContentLoaded", function() {
-        const tableBody = document.querySelector("#newsTable tbody");
+        document.addEventListener("DOMContentLoaded", function() {
+            const tableBody = document.querySelector("#newsTable tbody");
 
-        // Ambil data dari backend menggunakan Axios
-        axios.get("http://localhost/UtbKosWeb/backend/listpesanan.php")
-            .then(response => {
-                const data = response.data;
-                let rows = "";
+            // Ambil data dari backend menggunakan Axios
+            axios.get("http://localhost/UtbKosWeb/backend/listpesanan.php")
+                .then(response => {
+                    const data = response.data;
+                    let rows = "";
 
-                data.forEach((item, index) => {
-                    const totalHarga = item.harga_sewa * item
-                        .jumlah_bulan; // Hitung total harga sewa
+                    data.forEach((item, index) => {
+                        const totalHarga = item.harga_sewa * item
+                            .jumlah_bulan; // Hitung total harga sewa
 
-                    rows += `
+                        rows += `
                     <tr>
                         <td>${index + 1}</td>
                         <td>${item.nama_pemesan}</td>
@@ -69,22 +69,22 @@
                         <td>${item.tanggal_survey}</td>
                         <td>${item.jumlah_bulan}</td>
                         <td>${item.email}</td>
-                        <td>${item.notelp}</td>
+                        <td>${item.no_telp}</td>
                         <td>Rp ${item.harga_sewa.toLocaleString()}</td>
                         <td>Rp ${totalHarga.toLocaleString()}</td>
                     </tr>
                 `;
+                    });
+
+                    tableBody.innerHTML = rows; // Masukkan baris ke dalam tabel
+
+                    // Inisialisasi DataTables
+                    new DataTable("#newsTable");
+                })
+                .catch(error => {
+                    console.error("Gagal mengambil data:", error);
                 });
-
-                tableBody.innerHTML = rows; // Masukkan baris ke dalam tabel
-
-                // Inisialisasi DataTables
-                new DataTable("#newsTable");
-            })
-            .catch(error => {
-                console.error("Gagal mengambil data:", error);
-            });
-    });
+        });
     </script>
 </body>
 
