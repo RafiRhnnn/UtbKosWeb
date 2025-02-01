@@ -28,25 +28,24 @@
                     <tr>
                         <th>No</th>
                         <th>Nama Pemesan</th>
-                        <th>alamat kos</th>
-                        <th>tanggal survey</th>
-                        <th>jumlah bulan</th>
+                        <th>Alamat Kos</th>
+                        <th>Tanggal Survey</th>
+                        <th>Jumlah Bulan</th>
                         <th>Email</th>
                         <th>No Whatsapp</th>
                         <th>Harga Sewa /Bulan</th>
                         <th>Total Harga Sewa</th>
+                        <th>Status</th>
+                        <th>Aksi</th>
                     </tr>
                 </thead>
                 <tbody></tbody>
             </table>
         </div>
-
     </div>
-
 
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
-    <script src="../assets/js/scriptstambah.js"></script>
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             const tableBody = document.querySelector("#newsTable tbody");
@@ -58,22 +57,37 @@
                     let rows = "";
 
                     data.forEach((item, index) => {
-                        const totalHarga = item.harga_sewa * item
-                            .jumlah_bulan; // Hitung total harga sewa
+                        const totalHarga = item.harga_sewa * item.jumlah_bulan;
+
+                        // Tentukan class CSS berdasarkan status
+                        let statusClass = "status-pending"; // Default untuk null/pending
+                        if (item.status === "disetujui") {
+                            statusClass = "status-disetujui";
+                        } else if (item.status === "ditolak") {
+                            statusClass = "status-ditolak";
+                        }
+
+                        // Tampilkan teks status
+                        const statusText = item.status === null ? "Pending" : item.status;
 
                         rows += `
-                    <tr>
-                        <td>${index + 1}</td>
-                        <td>${item.nama_pemesan}</td>
-                        <td>${item.nama_kos}</td>
-                        <td>${item.tanggal_survey}</td>
-                        <td>${item.jumlah_bulan}</td>
-                        <td>${item.email}</td>
-                        <td>${item.no_telp}</td>
-                        <td>Rp ${item.harga_sewa.toLocaleString()}</td>
-                        <td>Rp ${totalHarga.toLocaleString()}</td>
-                    </tr>
-                `;
+                            <tr>
+                                <td>${index + 1}</td>
+                                <td>${item.nama_pemesan}</td>
+                                <td>${item.nama_kos}</td>
+                                <td>${item.tanggal_survey}</td>
+                                <td>${item.jumlah_bulan}</td>
+                                <td>${item.email}</td>
+                                <td>${item.no_telp}</td>
+                                <td>Rp ${item.harga_sewa.toLocaleString()}</td>
+                                <td>Rp ${totalHarga.toLocaleString()}</td>
+                                <td><span class="${statusClass}">${statusText}</span></td>
+                                <td>
+                                    <button class="btn btn-success btn-sm" onclick="updateStatus(${item.id}, 'disetujui')">Disetujui</button>
+                                    <button class="btn btn-danger btn-sm" onclick="updateStatus(${item.id}, 'ditolak')">Ditolak</button>
+                                </td>
+                            </tr>
+                        `;
                     });
 
                     tableBody.innerHTML = rows; // Masukkan baris ke dalam tabel
@@ -85,6 +99,21 @@
                     console.error("Gagal mengambil data:", error);
                 });
         });
+
+        // Fungsi untuk memperbarui status
+        function updateStatus(id, status) {
+            axios.post("http://localhost/UtbKosWeb/backend/updatestatus.php", {
+                    id: id,
+                    status: status
+                })
+                .then(response => {
+                    alert(response.data.success || response.data.error);
+                    location.reload(); // Muat ulang halaman setelah memperbarui status
+                })
+                .catch(error => {
+                    console.error("Gagal memperbarui status:", error);
+                });
+        }
     </script>
 </body>
 

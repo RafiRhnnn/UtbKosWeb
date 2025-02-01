@@ -45,7 +45,7 @@ if (isset($_SESSION['username'])) {
                         <a class="nav-link" href="index.php">Produk</a>
                     </li>
                     <li class="nav-item mx-3">
-                        <a class="nav-link" href="#promo">History</a>
+                        <a class="nav-link" href="history.php">History</a>
                     </li>
                 </ul>
                 <!-- Dropdown untuk Username -->
