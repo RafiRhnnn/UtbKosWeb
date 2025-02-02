@@ -40,46 +40,52 @@ $search = isset($_GET['search']) ? $_GET['search'] : '';
     <?php include "footer.php"; ?>
 
     <script>
-       $(document).ready(function () {
-            // Mengambil kata kunci pencarian dari URL
-            const searchQuery = "<?php echo $search; ?>";
+    $(document).ready(function() {
+        // Mengambil kata kunci pencarian dari URL
+        const searchQuery = "<?php echo $search; ?>";
 
-            if (searchQuery !== '') {
+        if (searchQuery !== '') {
             // Mengambil hasil pencarian dari API
-         axios.get('http://localhost/UtbKosWeb/backend/search_kost_api.php', {
-            params: { search: searchQuery } })
-            .then(function (response) {
-            let kosList = response.data.data;
-            let content = '';
+            axios.get('http://localhost/UtbKosWeb/backend/search_kost_api.php', {
+                    params: {
+                        search: searchQuery
+                    }
+                })
+                .then(function(response) {
+                    console.log(response.data); // Debugging: Cek respons API
 
-            if (kosList.length > 0) {
-                kosList.forEach(kos => {
-                    content += `
-                        <div class="col-md-4 mb-4">
-                            <div class="card shadow-sm">
-                                <img src="${kos.img}" class="card-img-top" style="height: 200px; object-fit: cover;">
-                                <div class="card-body">
-                                    <h5 class="card-title">${kos.namakos}</h5>
-                                    <p class="card-text">${kos.alamatkos}</p>
-                                    <p class="text-muted">Harga: <strong>Rp ${kos.hargasewa}</strong></p>
-                                    <p class="text-muted">Fasilitas: ${kos.fasilitas}</p>
-                                    <a href="detailkost.php?id=${kos.id}" class="btn btn-primary btn-sm">Lihat Detail</a>
+                    let kosList = response.data.data;
+                    let content = '';
+
+                    if (kosList && kosList.length > 0) {
+                        kosList.forEach(kos => {
+                            content += `
+                                <div class="col-md-4 mb-4">
+                                    <div class="card shadow-sm">
+                                        <img src="${kos.img}" class="card-img-top" onerror="this.onerror=null; this.src='assets/images/default.jpg';" style="height: 200px; object-fit: cover;">
+                                        <div class="card-body">
+                                            <h5 class="card-title">${kos.namakos}</h5>
+                                            <p class="card-text">${kos.alamatkos}</p>
+                                            <p class="text-muted">Harga: <strong>Rp ${kos.hargasewa}</strong></p>
+                                            <p class="text-muted">Fasilitas: ${kos.fasilitas}</p>
+                                            <a href="detailkost.php?id=${kos.id}" class="btn btn-primary btn-sm">Lihat Detail</a>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
-                    `;
+                            `;
+                        });
+                    } else {
+                        content = '<p class="text-center">Kost tidak ditemukan.</p>';
+                    }
+
+                    $('#kosList').html(content);
+                })
+                .catch(function(error) {
+                    console.error("Error fetching data:", error);
+                    $('#kosList').html('<p class="text-center">Gagal memuat data kos.</p>');
                 });
-            } else {
-                content = '<p class="text-center">Kost tidak ditemukan.</p>';
-            }
-
-            $('#kosList').html(content);}) .catch(function (error) {
-            console.error(error);
-            $('#kosList').html('<p class="text-center">Gagal memuat data kos.</p>');
-        });
-    }
-});
-
+        }
+    });
     </script>
 
 </body>
