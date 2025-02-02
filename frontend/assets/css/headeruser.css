@@ -32,3 +32,22 @@
 ul {
     font-size: 1.25rem;
 }
+
+/* Styling untuk item hasil pencarian */
+.kos-item {
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+}
+
+.kos-item h4 {
+    margin: 0;
+    font-size: 18px;
+    color: #333;
+}
+
+.kos-item p {
+    margin: 5px 0;
+    font-size: 14px;
+}

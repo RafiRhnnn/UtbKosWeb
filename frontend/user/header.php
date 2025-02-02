@@ -11,7 +11,6 @@ if (isset($_SESSION['username'])) {
 }
 ?>
 
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -24,7 +23,6 @@ if (isset($_SESSION['username'])) {
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
-
 </head>
 
 <body>
@@ -48,6 +46,13 @@ if (isset($_SESSION['username'])) {
                         <a class="nav-link" href="history.php">History</a>
                     </li>
                 </ul>
+                
+                <!-- Form Pencarian -->
+                <form class="d-flex ms-3" id="searchForm" style="max-width: 600px; margin: auto;" action="search.php" method="get">
+                    <input class="form-control me-2" type="search" placeholder="Cari berdasarkan nama atau daerah" aria-label="Search" id="searchInput" name="search">
+                    <button class="btn btn-outline-success" type="submit">Cari</button>
+                </form>
+
                 <!-- Dropdown untuk Username -->
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item dropdown">
@@ -61,48 +66,11 @@ if (isset($_SESSION['username'])) {
                         </ul>
                     </li>
                 </ul>
-
             </div>
         </div>
     </nav>
-
     <!-- navbar end -->
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script>
-        function logout() {
-            // Mendapatkan session_token dari tempat penyimpanan yang sesuai (misalnya, cookie)
-            const sessionToken = localStorage.getItem('session_token'); // Gantilah dengan yang sesuai
-            // Hapus 'nama' dari localStorage setelah logout
-            localStorage.removeItem('email');
 
-            // Membuat objek FormData
-            const formData = new FormData();
-            formData.append('session_token', sessionToken);
-
-            // Konfigurasi Axios untuk logout
-            axios.post('http://localhost/UtbKosWeb/backend/logout.php', formData)
-                .then(response => {
-                    // Handle respons dari server
-                    if (response.data.status === 'success') {
-                        // Jika logout berhasil, arahkan kembali ke halaman login
-                        localStorage.removeItem('session_token');
-                        window.location.href = '../login.php';
-                    } else {
-                        // Jika logout gagal, tampilkan pesan kesalahan
-                        alert('Logout failed. Please try again.');
-                    }
-                })
-                .catch(error => {
-                    // Handle kesalahan koneksi atau server
-                    console.error('Error during logout:', error);
-                });
-        }
-    </script>
-    <!-- jQuery -->
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    <!-- DataTables JavaScript -->
-    <script type="text/javascript" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
-    <script type="text/javascript" src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
 </body>
 
 </html>

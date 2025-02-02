@@ -17,7 +17,6 @@ include "../check_session.php";
     <link rel="stylesheet" href="../assets/css/stlyefooter.css">
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-
 </head>
 
 <body>
@@ -38,9 +37,10 @@ include "../check_session.php";
     <?php include "footer.php"; ?>
 
     <script>
-        $(document).ready(function() {
+        $(document).ready(function () {
+            // Menarik data kosan saat halaman dimuat
             axios.get('http://localhost/UtbKosWeb/backend/listkos.php')
-                .then(function(response) {
+                .then(function (response) {
                     let kosList = response.data;
                     let content = '';
 
@@ -63,7 +63,7 @@ include "../check_session.php";
 
                     $('#kosList').html(content);
                 })
-                .catch(function(error) {
+                .catch(function (error) {
                     console.error(error);
                     $('#kosList').html('<p class="text-center">Gagal memuat data kos.</p>');
                 });
