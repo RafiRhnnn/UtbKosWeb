@@ -38,8 +38,8 @@
                 <div class="col-md-3">
                     <div class="card text-white bg-info mb-3">
                         <div class="card-body">
-                            <h5 class="card-title">Transactions</h5>
-                            <p class="card-text">12.1k <small class="text-light">+38%</small></p>
+                            <h5 class="card-title">Jumlah Pesanan</h5>
+                            <p id="jumlah-pesanan" class="card-text">Memuat... <small class="text-light">pesanan</small></p>
                         </div>
                     </div>
                 </div>
@@ -75,8 +75,30 @@
             }
         }
 
+        async function fetchJumlahPesanan() {
+            try {
+                // Panggil backend menggunakan Axios
+                const response = await axios.get('http://localhost/UtbKosWeb/backend/jumlahpesanan.php');
+                const data = response.data;
+
+                // Periksa apakah respons sukses
+                if (data.status === 'success') {
+                    // Update jumlah kosan di halaman
+                    document.getElementById('jumlah-pesanan').innerHTML = `${data.jumlah_pesanan} <small class="text-light">pesanan</small>`;
+                } else {
+                    // Tampilkan pesan error jika gagal
+                    document.getElementById('jumlah-pesanan').innerHTML = `Error: ${data.message}`;
+                }
+            } catch (error) {
+                // Tampilkan pesan error jika terjadi masalah koneksi
+                document.getElementById('jumlah-pesanan').innerHTML = 'Error: Gagal memuat data';
+                console.error(error);
+            }
+        }
+
         // Panggil fungsi saat halaman dimuat
         fetchJumlahKosan();
+        fetchJumlahPesanan();
     </script>
 </body>
 

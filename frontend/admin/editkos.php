@@ -61,78 +61,91 @@ $id = isset($_POST['id']) ? $_POST['id'] : null;
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
-    function getData() {
-        const kosId = document.getElementById('kosId').value;
-        const formData = new FormData();
-        formData.append('idkos', kosId);
+        function getData() {
+            const kosId = document.getElementById('kosId').value;
+            const formData = new FormData();
+            formData.append('idkos', kosId);
 
-        axios.post('http://localhost/UtbKosWeb/backend/selectdatakos.php', formData)
-            .then(response => {
-                if (response.data.error) {
-                    alert(response.data.error);
-                } else {
-                    document.getElementById('namakos').value = response.data.namakos;
-                    document.getElementById('alamatkos').value = response.data.alamatkos;
-                    document.getElementById('hargasewa').value = response.data.hargasewa;
-                    document.getElementById('tipe').value = response.data.tipe;
-                    document.getElementById('notelp').value = response.data.notelp;
-                    document.getElementById('fasilitas').value = response.data.fasilitas;
-                    document.getElementById('detailkost').value = response.data.detailkost;
-                }
-            })
-            .catch(error => {
-                console.error(error);
-                alert('Error fetching kos data.');
-            });
-    }
-
-    function editKos() {
-        const kosId = document.getElementById('kosId').value;
-        const namakos = document.getElementById('namakos').value;
-        const alamatkos = document.getElementById('alamatkos').value;
-        const hargasewa = document.getElementById('hargasewa').value;
-        const tipe = document.getElementById('tipe').value;
-        const notelp = document.getElementById('notelp').value;
-        const fasilitas = document.getElementById('fasilitas').value;
-        const detailkost = document.getElementById('detailkost').value;
-        const urlImageInput = document.getElementById('url_image');
-        const url_image = urlImageInput.files[0];
-        const date = new Date().toISOString().split('T')[0];
-
-        const formData = new FormData();
-        formData.append('idkos', kosId);
-        formData.append('namakos', namakos);
-        formData.append('alamatkos', alamatkos);
-        formData.append('hargasewa', hargasewa);
-        formData.append('tipe', tipe);
-        formData.append('notelp', notelp);
-        formData.append('fasilitas', fasilitas);
-        formData.append('detailkost', detailkost);
-        formData.append('date', date);
-
-        if (urlImageInput.files.length > 0) {
-            formData.append('url_image', url_image);
+            axios.post('http://localhost/UtbKosWeb/backend/selectdatakos.php', formData)
+                .then(response => {
+                    if (response.data.error) {
+                        alert(response.data.error);
+                    } else {
+                        document.getElementById('namakos').value = response.data.namakos;
+                        document.getElementById('alamatkos').value = response.data.alamatkos;
+                        document.getElementById('hargasewa').value = response.data.hargasewa;
+                        document.getElementById('tipe').value = response.data.tipe;
+                        document.getElementById('notelp').value = response.data.notelp;
+                        document.getElementById('fasilitas').value = response.data.fasilitas;
+                        document.getElementById('detailkost').value = response.data.detailkost;
+                    }
+                })
+                .catch(error => {
+                    console.error(error);
+                    alert('Error fetching kos data.');
+                });
         }
 
-        axios.post('http://localhost/UtbKosWeb/backend/editkos.php', formData, {
-                headers: {
-                    'Content-Type': 'multipart/form-data',
-                },
-            })
-            .then(response => {
-                alert(response.data.success || response.data.error);
-                if (response.data.success) {
-                    window.location.href = 'kelola.php';
-                }
-            })
-            .catch(error => {
-                console.error(error);
-                alert('Error editing kos data.');
-            });
-    }
+        function editKos() {
+            const kosId = document.getElementById('kosId').value;
+            const namakos = document.getElementById('namakos').value;
+            const alamatkos = document.getElementById('alamatkos').value;
+            const hargasewa = document.getElementById('hargasewa').value;
+            const tipe = document.getElementById('tipe').value;
+            const notelp = document.getElementById('notelp').value;
+            const fasilitas = document.getElementById('fasilitas').value;
+            const detailkost = document.getElementById('detailkost').value;
+            const urlImageInput = document.getElementById('url_image');
+            const url_image = urlImageInput.files[0];
+            const date = new Date().toISOString().split('T')[0];
 
-    window.onload = getData;
+            const formData = new FormData();
+            formData.append('idkos', kosId);
+            formData.append('namakos', namakos);
+            formData.append('alamatkos', alamatkos);
+            formData.append('hargasewa', hargasewa);
+            formData.append('tipe', tipe);
+            formData.append('notelp', notelp);
+            formData.append('fasilitas', fasilitas);
+            formData.append('detailkost', detailkost);
+            formData.append('date', date);
+
+            if (urlImageInput.files.length > 0) {
+                formData.append('url_image', url_image);
+            }
+
+            axios.post('http://localhost/UtbKosWeb/backend/editkos.php', formData, {
+                    headers: {
+                        'Content-Type': 'multipart/form-data',
+                    },
+                })
+                .then(response => {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Berhasil di edit!',
+                        text: 'Berhasil edit kos',
+                        confirmButtonText: 'OK'
+                    }).then(() => {
+                        setTimeout(() => {
+                            window.location.href = "kelola.php";
+                        }, 500); // Tambahkan delay 500ms
+                    });
+
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops!',
+                        text: 'Terjadi kesalahan, coba lagi.',
+                        confirmButtonText: 'OK'
+                    });
+                });
+        }
+
+        window.onload = getData;
     </script>
 </body>
 

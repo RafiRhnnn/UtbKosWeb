@@ -72,29 +72,47 @@
 
     <script src="../assets/js/scriptstambah.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <script>
         function addNews() {
             const formData = new FormData(document.getElementById("addNewsForm"));
-            
+
             // Tambahkan tanggal secara otomatis
             const date = new Date().toISOString().split('T')[0]; // Format YYYY-MM-DD
             formData.append('date', date);
 
             axios.post('http://localhost/UtbKosWeb/backend/tambahkos.php', formData, {
-                headers: { 'Content-Type': 'multipart/form-data' }
-            })
-            .then(response => {
-                alert(response.data);  // Menampilkan respons dari backend
-                document.getElementById("addNewsForm").reset();
-                window.location.href = "daftar_kosan.php"; // Redirect ke daftar kosan
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                alert('Terjadi kesalahan, coba lagi.');
-            });
+                    headers: {
+                        'Content-Type': 'multipart/form-data'
+                    }
+                })
+                .then(response => {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Berhasil!',
+                        text: 'Berhasil menambahkan kos',
+                        confirmButtonText: 'OK'
+                    }).then(() => {
+                        setTimeout(() => {
+                            window.location.href = "tambah.php";
+                        }, 500); // Tambahkan delay 500ms
+                    });
+
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops!',
+                        text: 'Terjadi kesalahan, coba lagi.',
+                        confirmButtonText: 'OK'
+                    });
+                });
         }
     </script>
 
+
 </body>
+
 </html>

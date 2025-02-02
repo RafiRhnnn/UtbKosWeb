@@ -9,7 +9,7 @@
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
     <link rel="icon" href="assets/images/logo.ico">
-    <link rel="stylesheet" href="assets/css/indexutama.css">
+    <link rel="stylesheet" href="assets/css/styleindex1.css">
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -95,8 +95,8 @@
                 </div>
                 <!-- Kolom untuk gambar (kanan) -->
                 <div class="col-md-6 text-end" data-aos="fade-left" data-aos-duration="2000">
-                    <div class=" image-wrapper">
-                        <img src="assets/images/kosan.jpg" alt="Tentang Kami" class="rounded-img" id="images">
+                    <div class="custom-image-wrapper">
+                        <img src="assets/images/about1.png" alt="Tentang Kami" class="rounded-img" id="images">
                     </div>
                 </div>
 
@@ -111,17 +111,17 @@
         <h2 class="text-center mb-4">Promo</h2>
         <div id="promoCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="3000">
             <div class="carousel-inner">
-                <div class="carousel-item active" data-description="Dapatkan diskon spesial hingga 30% untuk kost pilihan di berbagai lokasi strategis.">
-                    <img src="assets/images/banner/banner_0.jpg" class="d-block w-100 img-fluid rounded" alt="Promo 1">
+                <div class="carousel-item active">
+                    <img src="assets/images/banner/promo_1.jpg" class="d-block w-100 img-fluid rounded" alt="Promo 1">
                 </div>
-                <div class="carousel-item" data-description="Temukan kost dengan fasilitas lengkap mulai dari WiFi gratis hingga area parkir luas.">
-                    <img src="assets/images/banner/banner_1.jpg" class="d-block w-100 img-fluid rounded" alt="Promo 2">
+                <div class="carousel-item">
+                    <img src="assets/images/banner/promo_2.jpg" class="d-block w-100 img-fluid rounded" alt="Promo 2">
                 </div>
-                <div class="carousel-item" data-description="Nikmati cashback untuk pengguna baru saat memesan kost melalui UtbKos!">
-                    <img src="assets/images/banner/banner_2.jpg" class="d-block w-100 img-fluid rounded" alt="Promo 3">
+                <div class="carousel-item">
+                    <img src="assets/images/banner/promo_3.jpg" class="d-block w-100 img-fluid rounded" alt="Promo 3">
                 </div>
-                <div class="carousel-item" data-description="Promo eksklusif untuk kost campur, kost khusus perempuan, dan kost khusus laki-laki.">
-                    <img src="assets/images/banner/banner_3.jpg" class="d-block w-100 img-fluid rounded" alt="Promo 4">
+                <div class="carousel-item">
+                    <img src="assets/images/banner/promo_4.jpg" class="d-block w-100 img-fluid rounded" alt="Promo 4">
                 </div>
             </div>
             <button class="carousel-control-prev" type="button" data-bs-target="#promoCarousel" data-bs-slide="prev">

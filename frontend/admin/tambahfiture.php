@@ -48,6 +48,8 @@
 
     <script src="../assets/js/scriptstambah.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 
     <script>
         function addFiture() {
@@ -72,23 +74,35 @@
                 })
                 .then(function(response) {
                     console.log('Response:', response.data); // Menampilkan respons dari server
-                    alert('Fiture berhasil ditambahkan!');
-                    document.getElementById('addFitureForm').reset(); // Reset form setelah sukses
+
+                    // Menampilkan alert dengan tombol OK
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Feature berhasil ditambah!',
+                        text: 'Data fitur telah tersimpan.',
+                        confirmButtonText: 'OK' // Menampilkan tombol OK
+                    }).then(() => {
+                        document.getElementById('addFitureForm').reset(); // Reset form setelah pengguna klik OK
+                    });
+
                 })
                 .catch(function(error) {
-                    // Menangani error
+                    let errorMessage = 'Terjadi kesalahan!';
+
                     if (error.response) {
-                        console.error('Response data:', error.response.data);
-                        console.error('Status:', error.response.status);
-                        console.error('Headers:', error.response.headers);
-                        alert(`Error: ${error.response.data}\nStatus Code: ${error.response.status}`);
+                        errorMessage = `Error: ${error.response.data}\nStatus Code: ${error.response.status}`;
                     } else if (error.request) {
-                        console.error('Request:', error.request);
-                        alert('Server tidak memberikan respon. Silakan periksa koneksi atau konfigurasi server.');
+                        errorMessage = 'Server tidak memberikan respon. Silakan periksa koneksi atau konfigurasi server.';
                     } else {
-                        console.error('Error message:', error.message);
-                        alert(`Kesalahan dalam pengaturan permintaan: ${error.message}`);
+                        errorMessage = `Kesalahan dalam pengaturan permintaan: ${error.message}`;
                     }
+
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Gagal!',
+                        text: errorMessage,
+                        confirmButtonText: 'OK' // Tombol OK untuk error
+                    });
                 });
         }
     </script>
