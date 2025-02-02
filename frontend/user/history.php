@@ -13,10 +13,9 @@ include "../check_session.php";
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="icon" href="../assets/images/logo.ico">
-    <link rel="stylesheet" href="../assets/css/stylehistory.css">k
+    <link rel="stylesheet" href="../assets/css/stylehistory.css">
 
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </head>
 
 <body>
@@ -41,6 +40,7 @@ include "../check_session.php";
                         <th>Harga Sewa / Bulan</th>
                         <th>Total Harga Sewa</th>
                         <th>Status</th>
+                        <th>Aksi</th>
                     </tr>
                 </thead>
                 <tbody></tbody>
@@ -49,8 +49,6 @@ include "../check_session.php";
 
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             const tableBody = document.querySelector("#historyTable tbody");
@@ -102,6 +100,9 @@ include "../check_session.php";
                             <td>Rp ${item.harga_sewa.toLocaleString()}</td>
                             <td>Rp ${totalHarga.toLocaleString()}</td>
                             <td><span class="${statusClass}">${statusText}</span></td>
+                            <td>
+                                <button class="btn btn-danger btn-sm" onclick="hapusPesanan(${item.id})">Hapus</button>
+                            </td>
                         </tr>
                     `;
                         });
@@ -116,6 +117,40 @@ include "../check_session.php";
                     console.error("Gagal mengambil data:", error);
                 });
         });
+
+        function hapusPesanan(id) {
+    const sessionToken = localStorage.getItem('session_token');
+    if (!sessionToken) {
+        alert("Anda harus login terlebih dahulu.");
+        return;
+    }
+
+    // Menambahkan konfirmasi sebelum menghapus
+    const confirmDelete = confirm("Apakah Anda yakin ingin menghapus pesanan ini?");
+
+    if (confirmDelete) {
+        const formData = new FormData();
+        formData.append('session_token', sessionToken);
+        formData.append('pesanan_id', id);
+
+        axios.post('http://localhost/UtbKosWeb/backend/delete_pesanan.php', formData)
+            .then(response => {
+                if (response.data.status === 'success') {
+                    alert("Pesanan berhasil dihapus!");
+                    location.reload(); // Reload halaman untuk memperbarui tabel
+                } else {
+                    alert("Gagal menghapus pesanan: " + response.data.message);
+                }
+            })
+            .catch(error => {
+                console.error("Terjadi kesalahan:", error);
+                alert("Terjadi kesalahan saat menghapus pesanan.");
+            });
+    } else {
+        // Jika user memilih "Cancel" pada konfirmasi
+        alert("Penghapusan dibatalkan.");
+    }
+}
     </script>
 
 </body>

@@ -1,5 +1,6 @@
 <?php
 header("Access-Control-Allow-Origin: *");
+header('Content-Type: application/json');
 include 'koneksi.php';
 
 $session_token = $_POST['session_token'];
