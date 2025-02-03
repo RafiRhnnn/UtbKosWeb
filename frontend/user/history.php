@@ -50,47 +50,47 @@ include "../check_session.php";
         </div>
 
     </div>
-
+    <?php include "footer.php"; ?>
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            const tableBody = document.querySelector("#historyTable tbody");
-            const sessionToken = localStorage.getItem('session_token');
+    document.addEventListener("DOMContentLoaded", function() {
+        const tableBody = document.querySelector("#historyTable tbody");
+        const sessionToken = localStorage.getItem('session_token');
 
-            if (!sessionToken) {
-                alert("Anda belum login! Silakan login kembali.");
-                window.location.href = "../../login.php";
-                return;
-            }
+        if (!sessionToken) {
+            alert("Anda belum login! Silakan login kembali.");
+            window.location.href = "../../login.php";
+            return;
+        }
 
-            // Mengambil data history dari backend
-            axios.get(`http://localhost/UtbKosWeb/backend/listhistory.php?session_token=${sessionToken}`)
-                .then(response => {
-                    if (response.data.error) {
-                        alert(response.data.error); // Tampilkan pesan jika ada error
-                        window.location.href = "../login.php";
-                        return;
-                    }
+        // Mengambil data history dari backend
+        axios.get(`http://localhost/UtbKosWeb/backend/listhistory.php?session_token=${sessionToken}`)
+            .then(response => {
+                if (response.data.error) {
+                    alert(response.data.error); // Tampilkan pesan jika ada error
+                    window.location.href = "../login.php";
+                    return;
+                }
 
-                    const data = response.data; // Data yang diterima dari backend
-                    let rows = "";
+                const data = response.data; // Data yang diterima dari backend
+                let rows = "";
 
-                    if (Array.isArray(data)) { // Pastikan data adalah array
-                        data.forEach((item, index) => {
-                            const totalHarga = item.harga_sewa * item.jumlah_bulan;
+                if (Array.isArray(data)) { // Pastikan data adalah array
+                    data.forEach((item, index) => {
+                        const totalHarga = item.harga_sewa * item.jumlah_bulan;
 
-                            // Tentukan teks dan class CSS berdasarkan status
-                            let statusText = "Pending"; // Default untuk null/pending
-                            let statusClass = "status-pending";
+                        // Tentukan teks dan class CSS berdasarkan status
+                        let statusText = "Pending"; // Default untuk null/pending
+                        let statusClass = "status-pending";
 
-                            if (item.status === "disetujui") {
-                                statusText = "Disetujui";
-                                statusClass = "status-disetujui";
-                            } else if (item.status === "ditolak") {
-                                statusText = "Ditolak";
-                                statusClass = "status-ditolak";
-                            }
+                        if (item.status === "disetujui") {
+                            statusText = "Disetujui";
+                            statusClass = "status-disetujui";
+                        } else if (item.status === "ditolak") {
+                            statusText = "Ditolak";
+                            statusClass = "status-ditolak";
+                        }
 
-                            rows += `
+                        rows += `
                         <tr>
                             <td>${index + 1}</td>
                             <td>${item.nama_pemesan}</td>
@@ -107,68 +107,70 @@ include "../check_session.php";
                             </td>
                         </tr>
                     `;
-                        });
+                    });
 
-                        tableBody.innerHTML = rows;
-                        new DataTable("#historyTable");
-                    } else {
-                        console.error("Data yang diterima bukan array:", data);
-                    }
-                })
-                .catch(error => {
-                    console.error("Gagal mengambil data:", error);
-                });
+                    tableBody.innerHTML = rows;
+                    new DataTable("#historyTable");
+                } else {
+                    console.error("Data yang diterima bukan array:", data);
+                }
+            })
+            .catch(error => {
+                console.error("Gagal mengambil data:", error);
+            });
+    });
+
+    function hapusPesanan(id) {
+        const sessionToken = localStorage.getItem('session_token');
+        if (!sessionToken) {
+            alert("Anda harus login terlebih dahulu.");
+            return;
+        }
+
+        // Menambahkan konfirmasi sebelum menghapus
+        Swal.fire({
+            title: "Apakah Anda yakin?",
+            text: "Data ini akan dihapus secara permanen!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#d33",
+            cancelButtonColor: "#3085d6",
+            confirmButtonText: "Ya, hapus!",
+            cancelButtonText: "Batal"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                const formData = new FormData();
+                formData.append('session_token', sessionToken);
+                formData.append('pesanan_id', id);
+
+                axios.post('http://localhost/UtbKosWeb/backend/delete_pesanan.php', formData)
+                    .then(response => {
+                        if (response.data.status === 'success') {
+                            Swal.fire({
+                                title: "Success!",
+                                text: "Pesanan berhasil dihapus!",
+                                icon: "success",
+                                confirmButtonColor: "#3085d6",
+                                confirmButtonText: "OK"
+                            }).then(() => {
+                                location.reload(); // Reload halaman setelah alert ditutup
+                            });
+                        } else {
+                            Swal.fire("Gagal!", "Gagal menghapus pesanan: " + response.data.message,
+                                "error");
+                        }
+                    })
+                    .catch(error => {
+                        console.error("Terjadi kesalahan:", error);
+                        Swal.fire("Error!", "Terjadi kesalahan saat menghapus pesanan.", "error");
+                    });
+            }
         });
 
-        function hapusPesanan(id) {
-            const sessionToken = localStorage.getItem('session_token');
-            if (!sessionToken) {
-                alert("Anda harus login terlebih dahulu.");
-                return;
-            }
-
-            // Menambahkan konfirmasi sebelum menghapus
-            Swal.fire({
-                title: "Apakah Anda yakin?",
-                text: "Data ini akan dihapus secara permanen!",
-                icon: "warning",
-                showCancelButton: true,
-                confirmButtonColor: "#d33",
-                cancelButtonColor: "#3085d6",
-                confirmButtonText: "Ya, hapus!",
-                cancelButtonText: "Batal"
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    const formData = new FormData();
-                    formData.append('session_token', sessionToken);
-                    formData.append('pesanan_id', id);
-
-                    axios.post('http://localhost/UtbKosWeb/backend/delete_pesanan.php', formData)
-                        .then(response => {
-                            if (response.data.status === 'success') {
-                                Swal.fire({
-                                    title: "Success!",
-                                    text: "Pesanan berhasil dihapus!",
-                                    icon: "success",
-                                    confirmButtonColor: "#3085d6",
-                                    confirmButtonText: "OK"
-                                }).then(() => {
-                                    location.reload(); // Reload halaman setelah alert ditutup
-                                });
-                            } else {
-                                Swal.fire("Gagal!", "Gagal menghapus pesanan: " + response.data.message, "error");
-                            }
-                        })
-                        .catch(error => {
-                            console.error("Terjadi kesalahan:", error);
-                            Swal.fire("Error!", "Terjadi kesalahan saat menghapus pesanan.", "error");
-                        });
-                }
-            });
-
-        }
+    }
     </script>
 
 </body>
+
 
 </html>

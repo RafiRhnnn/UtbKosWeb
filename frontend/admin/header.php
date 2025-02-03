@@ -56,9 +56,10 @@
     </ul>
     <hr>
     <div class="dropdown">
-        <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle"
-            data-bs-toggle="dropdown" aria-expanded="false">
-            <strong>selamat datang admin</strong>
+        <a href="#" class="d-flex align-items-center text-white text-decoration-none aria-expanded=" false">
+            <strong>
+                <p>&copy; 2025 Utbkos. Kelompok 1</p>
+            </strong>
 
         </a>
     </div>
