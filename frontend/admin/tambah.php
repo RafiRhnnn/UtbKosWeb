@@ -90,7 +90,7 @@
                 .then(response => {
                     Swal.fire({
                         icon: 'success',
-                        title: 'Berhasil!',
+                        title: 'Success!',
                         text: 'Berhasil menambahkan kos',
                         confirmButtonText: 'OK'
                     }).then(() => {

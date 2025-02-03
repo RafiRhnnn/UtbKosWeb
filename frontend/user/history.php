@@ -16,6 +16,8 @@ include "../check_session.php";
     <link rel="stylesheet" href="../assets/css/stylehistory.css">
 
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 </head>
 
 <body>
@@ -119,38 +121,52 @@ include "../check_session.php";
         });
 
         function hapusPesanan(id) {
-    const sessionToken = localStorage.getItem('session_token');
-    if (!sessionToken) {
-        alert("Anda harus login terlebih dahulu.");
-        return;
-    }
+            const sessionToken = localStorage.getItem('session_token');
+            if (!sessionToken) {
+                alert("Anda harus login terlebih dahulu.");
+                return;
+            }
 
-    // Menambahkan konfirmasi sebelum menghapus
-    const confirmDelete = confirm("Apakah Anda yakin ingin menghapus pesanan ini?");
+            // Menambahkan konfirmasi sebelum menghapus
+            Swal.fire({
+                title: "Apakah Anda yakin?",
+                text: "Data ini akan dihapus secara permanen!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#d33",
+                cancelButtonColor: "#3085d6",
+                confirmButtonText: "Ya, hapus!",
+                cancelButtonText: "Batal"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    const formData = new FormData();
+                    formData.append('session_token', sessionToken);
+                    formData.append('pesanan_id', id);
 
-    if (confirmDelete) {
-        const formData = new FormData();
-        formData.append('session_token', sessionToken);
-        formData.append('pesanan_id', id);
-
-        axios.post('http://localhost/UtbKosWeb/backend/delete_pesanan.php', formData)
-            .then(response => {
-                if (response.data.status === 'success') {
-                    alert("Pesanan berhasil dihapus!");
-                    location.reload(); // Reload halaman untuk memperbarui tabel
-                } else {
-                    alert("Gagal menghapus pesanan: " + response.data.message);
+                    axios.post('http://localhost/UtbKosWeb/backend/delete_pesanan.php', formData)
+                        .then(response => {
+                            if (response.data.status === 'success') {
+                                Swal.fire({
+                                    title: "Success!",
+                                    text: "Pesanan berhasil dihapus!",
+                                    icon: "success",
+                                    confirmButtonColor: "#3085d6",
+                                    confirmButtonText: "OK"
+                                }).then(() => {
+                                    location.reload(); // Reload halaman setelah alert ditutup
+                                });
+                            } else {
+                                Swal.fire("Gagal!", "Gagal menghapus pesanan: " + response.data.message, "error");
+                            }
+                        })
+                        .catch(error => {
+                            console.error("Terjadi kesalahan:", error);
+                            Swal.fire("Error!", "Terjadi kesalahan saat menghapus pesanan.", "error");
+                        });
                 }
-            })
-            .catch(error => {
-                console.error("Terjadi kesalahan:", error);
-                alert("Terjadi kesalahan saat menghapus pesanan.");
             });
-    } else {
-        // Jika user memilih "Cancel" pada konfirmasi
-        alert("Penghapusan dibatalkan.");
-    }
-}
+
+        }
     </script>
 
 </body>

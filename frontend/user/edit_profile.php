@@ -70,6 +70,8 @@ include "header.php"; // Navigasi user
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     <script>
         const sessionToken = localStorage.getItem('session_token');
         if (!sessionToken) {
@@ -111,10 +113,23 @@ include "header.php"; // Navigasi user
 
             axios.post('../../backend/api_update_profile.php', formData)
                 .then(response => {
-                    alert(response.data.message);
-                    window.location.href = "profile.php"; // Redirect setelah update
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Success!',
+                        text: 'Profil berhasil diubah!',
+                        confirmButtonText: 'OK'
+                    }).then(() => {
+                        window.location.href = "profile.php"; // Redirect setelah sukses
+                    });
                 })
-                .catch(error => alert('Terjadi kesalahan!'));
+                .catch(error => {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Terjadi kesalahan!',
+                    });
+                });
+
         });
 
         document.getElementById('updatePasswordForm').addEventListener('submit', function(e) {
@@ -138,12 +153,25 @@ include "header.php"; // Navigasi user
 
             axios.post('../../backend/api_update_password.php', formData)
                 .then(response => {
-                    alert(response.data.message);
-                    if (response.data.status === "success") {
-                        window.location.href = "profile.php"; // Redirect jika sukses
-                    }
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Success!',
+                        text: 'Password berhasil diubah!',
+                        confirmButtonText: 'OK'
+                    }).then(() => {
+                        if (response.data.status === "success") {
+                            window.location.href = "profile.php"; // Redirect setelah sukses
+                        }
+                    });
                 })
-                .catch(error => alert('Terjadi kesalahan!'));
+                .catch(error => {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Terjadi kesalahan!',
+                    });
+                });
+
         });
 
         fetchProfile();

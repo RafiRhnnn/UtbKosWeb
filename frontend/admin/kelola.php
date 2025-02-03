@@ -16,6 +16,7 @@
     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
     <!-- Axios -->
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body>
@@ -88,7 +89,7 @@
                     },
                     {
                         'data': 'tipe'
-                    }, 
+                    },
                     {
                         'data': 'notelp'
                     },
@@ -123,17 +124,34 @@
             var formData = new FormData();
             formData.append('idkos', id);
 
-            if (confirm("Are you sure you want to delete this kos?")) {
-                axios.post('http://localhost/UtbKosWeb/backend/deletekos.php', formData)
-                    .then(function(response) {
-                        alert(response.data.message || 'Kos deleted successfully!');
-                        $('#newsTable').DataTable().ajax.reload();
-                    })
-                    .catch(function(error) {
-                        console.error(error);
-                        alert('Error deleting kos.');
-                    });
-            }
+            Swal.fire({
+                title: "Apakah Anda yakin?",
+                text: "Data ini akan dihapus secara permanen!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#d33",
+                cancelButtonColor: "#3085d6",
+                confirmButtonText: "Ya, hapus!",
+                cancelButtonText: "Batal"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    axios.post('http://localhost/UtbKosWeb/backend/deletekos.php', formData)
+                        .then(function(response) {
+                            Swal.fire({
+                                title: "Deleted!",
+                                text: "Feature berhasil dihapus!",
+                                icon: "success",
+                                showConfirmButton: false,
+                                timer: 2000
+                            });
+
+                            $('#newsTable').DataTable().ajax.reload();
+                        })
+                        .catch(function(error) {
+                            Swal.fire("Error!", "Gagal menghapus data.", "error");
+                        });
+                }
+            });
         }
     </script>
 </body>

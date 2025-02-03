@@ -78,8 +78,8 @@
                     // Menampilkan alert dengan tombol OK
                     Swal.fire({
                         icon: 'success',
-                        title: 'Feature berhasil ditambah!',
-                        text: 'Data fitur telah tersimpan.',
+                        title: 'Success!',
+                        text: 'Feature berhasil ditambah!',
                         confirmButtonText: 'OK' // Menampilkan tombol OK
                     }).then(() => {
                         document.getElementById('addFitureForm').reset(); // Reset form setelah pengguna klik OK

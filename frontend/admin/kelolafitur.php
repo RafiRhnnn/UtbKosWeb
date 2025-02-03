@@ -16,6 +16,8 @@
     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
     <!-- Axios -->
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 </head>
 
 <body>
@@ -99,17 +101,37 @@
             var formData = new FormData();
             formData.append('id', id);
 
-            if (confirm("Are you sure you want to delete this feature?")) {
-                axios.post('http://localhost/UtbKosWeb/backend/deletefiture.php', formData)
-                    .then(function(response) {
-                        alert(response.data.message || 'Feature deleted successfully!');
-                        $('#featuresTable').DataTable().ajax.reload();
-                    })
-                    .catch(function(error) {
-                        console.error(error);
-                        alert('Error deleting feature.');
-                    });
-            }
+            Swal.fire({
+                title: "Apakah kamu yakin?",
+                text: "Fitur ini akan dihapus secara permanen!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#d33",
+                cancelButtonColor: "#3085d6",
+                confirmButtonText: "Ya, hapus!",
+                cancelButtonText: "Batal"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    axios.post('http://localhost/UtbKosWeb/backend/deletefiture.php', formData)
+                        .then(function(response) {
+                            Swal.fire({
+                                title: "Berhasil!",
+                                text: "Feature berhasil di delete!",
+                                icon: "success",
+                                showConfirmButton: false,
+                                timer: 2000
+                            });
+                            $('#featuresTable').DataTable().ajax.reload();
+                        })
+                        .catch(function(error) {
+                            Swal.fire({
+                                title: "Error!",
+                                text: "Terjadi kesalahan saat menghapus fitur.",
+                                icon: "error"
+                            });
+                        });
+                }
+            });
         }
     </script>
 </body>

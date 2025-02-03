@@ -25,28 +25,29 @@ include "../check_session.php";
     <?php include "footer.php"; ?>
 
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
-    const urlParams = new URLSearchParams(window.location.search);
-    const kostId = urlParams.get('id');
+        const urlParams = new URLSearchParams(window.location.search);
+        const kostId = urlParams.get('id');
 
-    axios.get(`http://localhost/UtbKosWeb/backend/getkos.php?id=${kostId}`)
-        .then(response => {
-            const kost = response.data;
-            if (!kost) {
-                document.getElementById('detailKost').innerHTML =
-                    `<div class="alert alert-danger">Kost tidak ditemukan</div>`;
-                return;
-            }
+        axios.get(`http://localhost/UtbKosWeb/backend/getkos.php?id=${kostId}`)
+            .then(response => {
+                const kost = response.data;
+                if (!kost) {
+                    document.getElementById('detailKost').innerHTML =
+                        `<div class="alert alert-danger">Kost tidak ditemukan</div>`;
+                    return;
+                }
 
-            // Isi input hidden untuk booking
-            document.getElementById('nama_kos').value = kost.namakos;
-            document.getElementById('alamat_kos').value = kost.alamatkos;
-            document.getElementById('harga_sewa').value = kost.hargasewa;
+                // Isi input hidden untuk booking
+                document.getElementById('nama_kos').value = kost.namakos;
+                document.getElementById('alamat_kos').value = kost.alamatkos;
+                document.getElementById('harga_sewa').value = kost.hargasewa;
 
-            let ceritaPendek = kost.detailkost.length > 150 ? kost.detailkost.substring(0, 150) + '...' : kost
-                .detailkost;
+                let ceritaPendek = kost.detailkost.length > 150 ? kost.detailkost.substring(0, 150) + '...' : kost
+                    .detailkost;
 
-            let content = `
+                let content = `
                     <div class="col-md-7">
                         <div class="image-gallery">
                             <img src="${kost.img}" class="img-fluid rounded shadow-sm" alt="Gambar Kost">
@@ -91,21 +92,21 @@ include "../check_session.php";
                         </div>
                     </div>
                 `;
-            document.getElementById('detailKost').innerHTML = content;
+                document.getElementById('detailKost').innerHTML = content;
 
-            document.getElementById('toggleStory').addEventListener('click', function() {
-                document.getElementById('shortStory').classList.toggle('d-none');
-                document.getElementById('fullStory').classList.toggle('d-none');
-                this.innerText = document.getElementById('fullStory').classList.contains('d-none') ?
-                    "Lihat Selengkapnya" : "Sembunyikan";
+                document.getElementById('toggleStory').addEventListener('click', function() {
+                    document.getElementById('shortStory').classList.toggle('d-none');
+                    document.getElementById('fullStory').classList.toggle('d-none');
+                    this.innerText = document.getElementById('fullStory').classList.contains('d-none') ?
+                        "Lihat Selengkapnya" : "Sembunyikan";
+                });
+
+            })
+            .catch(error => {
+                console.error(error);
+                document.getElementById('detailKost').innerHTML =
+                    `<div class="alert alert-danger">Gagal memuat detail kost</div>`;
             });
-
-        })
-        .catch(error => {
-            console.error(error);
-            document.getElementById('detailKost').innerHTML =
-                `<div class="alert alert-danger">Gagal memuat detail kost</div>`;
-        });
     </script>
 
     <!-- Modal Booking -->
@@ -151,60 +152,76 @@ include "../check_session.php";
     </div>
 
     <script>
-    // mendapatankan profile automatis mulai
-    document.addEventListener("DOMContentLoaded", function() {
-        const sessionToken = localStorage.getItem('session_token');
-        if (!sessionToken) {
-            alert("Anda belum login! Silakan login kembali.");
-            window.location.href = "../../login.php";
-            return;
-        }
+        // mendapatankan profile automatis mulai
+        document.addEventListener("DOMContentLoaded", function() {
+            const sessionToken = localStorage.getItem('session_token');
+            if (!sessionToken) {
+                alert("Anda belum login! Silakan login kembali.");
+                window.location.href = "../../login.php";
+                return;
+            }
 
-        function fetchProfile() {
-            axios.post('../../backend/api_get_profile.php', {
-                    session_token: sessionToken
-                })
+            function fetchProfile() {
+                axios.post('../../backend/api_get_profile.php', {
+                        session_token: sessionToken
+                    })
+                    .then(response => {
+                        if (response.data.status === 'success') {
+                            const userData = response.data.data;
+                            document.getElementById('nama_pemesan').value =
+                                `${userData.nama_depan || ""} ${userData.nama_belakang || ""}`.trim();
+                            document.getElementById('email').value = userData.email || "";
+                            document.getElementById('no_telp').value = userData.notelp || "";
+                        } else {
+                            alert(response.data.message);
+                        }
+                    })
+                    .catch(error => {
+                        console.error("Error:", error);
+                        alert('Terjadi kesalahan saat mengambil data profil!');
+                    });
+            }
+
+            fetchProfile();
+        });
+
+        // mendapatankan profile automatis akhir
+
+        document.getElementById('bookingForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const formData = new FormData(this);
+
+            axios.post('http://localhost/UtbKosWeb/backend/add_pesanan.php', formData)
                 .then(response => {
                     if (response.data.status === 'success') {
-                        const userData = response.data.data;
-                        document.getElementById('nama_pemesan').value =
-                            `${userData.nama_depan || ""} ${userData.nama_belakang || ""}`.trim();
-                        document.getElementById('email').value = userData.email || "";
-                        document.getElementById('no_telp').value = userData.notelp || "";
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Success!',
+                            text: 'Pesanan Anda telah berhasil dikirim.',
+                            confirmButtonText: 'Oke'
+                        }).then(() => {
+                            location.reload();
+                        });
                     } else {
-                        alert(response.data.message);
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Terjadi Kesalahan',
+                            text: response.data.message,
+                            confirmButtonText: 'Oke'
+                        });
                     }
                 })
                 .catch(error => {
-                    console.error("Error:", error);
-                    alert('Terjadi kesalahan saat mengambil data profil!');
+                    console.error('Error:', error);
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Kesalahan Server',
+                        text: 'Terjadi kesalahan saat mengirim pesanan.',
+                        confirmButtonText: 'Oke'
+                    });
                 });
-        }
-
-        fetchProfile();
-    });
-
-    // mendapatankan profile automatis akhir
-
-    document.getElementById('bookingForm').addEventListener('submit', function(e) {
-        e.preventDefault();
-
-        const formData = new FormData(this);
-
-        axios.post('http://localhost/UtbKosWeb/backend/add_pesanan.php', formData)
-            .then(response => {
-                if (response.data.status === 'success') {
-                    alert('Pesanan berhasil dikirim!');
-                    location.reload();
-                } else {
-                    alert('Terjadi kesalahan: ' + response.data.message);
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                alert('Terjadi kesalahan saat mengirim pesanan.');
-            });
-    });
+        });
     </script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
