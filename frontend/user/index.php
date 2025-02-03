@@ -13,7 +13,7 @@ include "../check_session.php";
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
     <link rel="icon" href="assets/images/logo.ico">
-    <link rel="stylesheet" href="../assets/css/styleindexuser.css">
+    <link rel="stylesheet" href="../assets/css/indexuser.css">
     <link rel="stylesheet" href="../assets/css/stlyefooter.css">
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
@@ -37,10 +37,10 @@ include "../check_session.php";
     <?php include "footer.php"; ?>
 
     <script>
-        $(document).ready(function () {
+        $(document).ready(function() {
             // Menarik data kosan saat halaman dimuat
             axios.get('http://localhost/UtbKosWeb/backend/listkos.php')
-                .then(function (response) {
+                .then(function(response) {
                     let kosList = response.data;
                     let content = '';
 
@@ -63,7 +63,7 @@ include "../check_session.php";
 
                     $('#kosList').html(content);
                 })
-                .catch(function (error) {
+                .catch(function(error) {
                     console.error(error);
                     $('#kosList').html('<p class="text-center">Gagal memuat data kos.</p>');
                 });

@@ -1,0 +1,43 @@
+svg {
+    width: 100%;
+    /* Membuat SVG memenuhi lebar layar */
+    display: block;
+    /* Menghindari space kosong di bawah SVG */
+    margin-top: -1px;
+    /* Mengurangi jarak jika diperlukan */
+}
+
+html,
+body {
+    height: 100%;
+    margin: 0;
+}
+
+/* Membuat wrapper untuk layout flex */
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+/* Konten utama fleksibel, agar footer tetap di bawah */
+.content {
+    flex: 1;
+
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background: linear-gradient(to bottom, #B7D7C9, #04616E);
+    background-size: 100% 400vh;
+    /* 2x tinggi viewport */
+    background-repeat: no-repeat;
+}
+
+
+footer {
+    margin-top: auto;
+    /* Push footer to the bottom */
+}

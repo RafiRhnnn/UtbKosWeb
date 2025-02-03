@@ -1,4 +1,4 @@
-<footer class="bg-dark text-white text-center py-3">
+<footer class="bg-dark text-white text-center py-3" style="margin-top: auto;">
     <p>&copy; 2025 Utbkos. Kelompok 1. Kelas TIF 22 CID. UAS WEB 1</p>
     <div class="container">
         <div class="row justify-content-center">

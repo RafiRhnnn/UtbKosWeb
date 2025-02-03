@@ -61,7 +61,7 @@
             <div class="d-flex flex-column align-items-start">
                 <h1>NGEKOS LEBIH MURAH & AMAN <span>UTBKOS</span>SOLUSINYA</h1>
                 <p>Temukan kenyamanan anda di UTBKos dengan fasilitas kumplit</p>
-                <a href="login.php" class="btn btn-warning btn-lg">KOST Sekarang</a>
+                <a href="login.php" class="btn btn-success btn-lg">KOST Sekarang</a>
             </div>
             <div class="d-flex justify-content-end col-md-9 col-lg-6 col-xl-5 text-end" data-aos="flip-right"
                 data-aos-easing="ease-out-cubic" data-aos-duration="2000">
@@ -82,17 +82,11 @@
                     <h3 data-aos="fade-right" data-aos-offset="50" data-aos-easing="ease-in-sine"
                         data-aos-duration="1000">Kenapa memilih UtbKos?</h3>
                     <p data-aos="fade-up" data-aos-duration="2000">
-                        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Velit odio odit adipisci ex,
-                        voluptatem maxime facere dolore, autem id repudiandae nesciunt fugiat voluptate tempore,
-                        tempora
-                        quidem impedit similique libero vel. Et itaque, beatae, maiores doloribus id architecto
-                        repudiandae, reprehenderit veniam repellat rerum ex aut laborum labore eligendi
-                        necessitatibus.
-                        Cupiditate, pariatur.
+                        UTBkos adalah platform pencarian kost yang menyediakan berbagai pilihan hunian nyaman, aman, dan terjangkau bagi mahasiswa dan pekerja.
+                        Kami menghubungkan pencari kost dengan pemilik kost secara mudah dan cepat, sehingga Anda dapat menemukan tempat tinggal yang sesuai dengan kebutuhan dan budget Anda.
                     </p>
                     <p data-aos="fade-up" data-aos-duration="2000">
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam dolorum blanditiis
-                        molestias?
+                        Dengan sistem pencarian yang cepat dan fitur lengkap, Anda bisa menemukan hunian ideal dalam hitungan menit.
                     </p>
                 </div>
                 <!-- Kolom untuk gambar (kanan) -->
@@ -189,20 +183,20 @@
     <!-- Footer End -->
 
     <script>
-    window.onload = function() {
-        AOS.init();
-    };
+        window.onload = function() {
+            AOS.init();
+        };
 
-    $(document).ready(function() {
-        axios.get('http://localhost/UtbKosWeb/backend/listfiture.php')
-            .then(function(response) {
-                console.log(response); // Debugging output
-                let fiturelist = response.data;
-                let content = '';
+        $(document).ready(function() {
+            axios.get('http://localhost/UtbKosWeb/backend/listfiture.php')
+                .then(function(response) {
+                    console.log(response); // Debugging output
+                    let fiturelist = response.data;
+                    let content = '';
 
-                if (fiturelist && fiturelist.length) {
-                    fiturelist.forEach(list => {
-                        content += `
+                    if (fiturelist && fiturelist.length) {
+                        fiturelist.forEach(list => {
+                            content += `
                             <div class="col-md-4 mb-4">
                                 <div class="card shadow-sm">
                                     <img src="${list.img}" class="card-img-top" style="height: 200px; object-fit: cover;">
@@ -213,18 +207,18 @@
                                 </div>
                             </div>
                         `;
-                    });
-                } else {
-                    content = '<p class="text-center">Belum ada fitur yang tersedia.</p>';
-                }
+                        });
+                    } else {
+                        content = '<p class="text-center">Belum ada fitur yang tersedia.</p>';
+                    }
 
-                $('#fiturelist').html(content);
-            })
-            .catch(function(error) {
-                console.error(error);
-                $('#fiturelist').html('<p class="text-center">Gagal memuat data kos.</p>');
-            });
-    });
+                    $('#fiturelist').html(content);
+                })
+                .catch(function(error) {
+                    console.error(error);
+                    $('#fiturelist').html('<p class="text-center">Gagal memuat data kos.</p>');
+                });
+        });
     </script>
 
 </body>
