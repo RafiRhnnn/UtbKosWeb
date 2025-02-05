@@ -1,0 +1,55 @@
+/* Warna untuk status */
+.status-pending {
+    background-color: #ffcc00;
+    color: #000;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.status-disetujui {
+    background-color: #28a745;
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.status-ditolak {
+    background-color: #dc3545;
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-weight: bold;
+}
+/* Agar wrapper mengambil tinggi penuh */
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Wrapper untuk seluruh halaman */
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* Konten utama fleksibel */
+.content {
+    flex-grow: 1;
+}
+
+/* Footer tetap di bawah */
+footer {
+    background-color: #212529; /* Warna gelap footer */
+    color: white; /* Warna teks footer */
+    text-align: center;
+    padding: 10px;
+    margin-top: auto; /* Agar tetap di bawah */
+    width: 100%;
+}
+

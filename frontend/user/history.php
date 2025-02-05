@@ -13,44 +13,44 @@ include "../check_session.php";
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="icon" href="../assets/images/logo.ico">
-    <link rel="stylesheet" href="../assets/css/stylehistory.css">
+    <link rel="stylesheet" href="../assets/css/stylehistoryyy.css">
 
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
 </head>
 
 <body>
-    <div class="container-fluid d-flex">
-        <!-- Sidebar -->
-
-
-        <!-- Konten Utama -->
-        <div class="container mt-5">
-            <h2 class="mb-4">Riwayat Pesanan</h2>
-
-            <table id="historyTable" class="table table-striped">
-                <thead>
-                    <tr>
-                        <th>No</th>
-                        <th>Nama Pemesan</th>
-                        <th>Alamat Kos</th>
-                        <th>Tanggal Survey</th>
-                        <th>Jumlah Bulan</th>
-                        <th>Email</th>
-                        <th>No Whatsapp</th>
-                        <th>Harga Sewa / Bulan</th>
-                        <th>Total Harga Sewa</th>
-                        <th>Status</th>
-                        <th>Aksi</th>
-                    </tr>
-                </thead>
-                <tbody></tbody>
-            </table>
+    <div class="wrapper">
+        <div class="content">
+            <div class="container mt-5">
+                <h2 class="mb-4">Riwayat Pesanan</h2>
+                <table id="historyTable" class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Nama Pemesan</th>
+                            <th>Alamat Kos</th>
+                            <th>Tanggal Survey</th>
+                            <th>Jumlah Bulan</th>
+                            <th>Email</th>
+                            <th>No Whatsapp</th>
+                            <th>Harga Sewa / Bulan</th>
+                            <th>Total Harga Sewa</th>
+                            <th>Status</th>
+                            <th>Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
         </div>
 
+        <!-- Footer -->
+        <footer>
+            <?php include "footer.php"; ?>
+        </footer>
     </div>
-    <?php include "footer.php"; ?>
+
     <script>
     document.addEventListener("DOMContentLoaded", function() {
         const tableBody = document.querySelector("#historyTable tbody");
@@ -62,24 +62,22 @@ include "../check_session.php";
             return;
         }
 
-        // Mengambil data history dari backend
         axios.get(`http://localhost/UtbKosWeb/backend/listhistory.php?session_token=${sessionToken}`)
             .then(response => {
                 if (response.data.error) {
-                    alert(response.data.error); // Tampilkan pesan jika ada error
+                    alert(response.data.error);
                     window.location.href = "../login.php";
                     return;
                 }
 
-                const data = response.data; // Data yang diterima dari backend
+                const data = response.data;
                 let rows = "";
 
-                if (Array.isArray(data)) { // Pastikan data adalah array
+                if (Array.isArray(data)) {
                     data.forEach((item, index) => {
                         const totalHarga = item.harga_sewa * item.jumlah_bulan;
 
-                        // Tentukan teks dan class CSS berdasarkan status
-                        let statusText = "Pending"; // Default untuk null/pending
+                        let statusText = "Pending";
                         let statusClass = "status-pending";
 
                         if (item.status === "disetujui") {
@@ -91,22 +89,22 @@ include "../check_session.php";
                         }
 
                         rows += `
-                        <tr>
-                            <td>${index + 1}</td>
-                            <td>${item.nama_pemesan}</td>
-                            <td>${item.nama_kos}</td>
-                            <td>${item.tanggal_survey}</td>
-                            <td>${item.jumlah_bulan}</td>
-                            <td>${item.email}</td>
-                            <td>${item.no_telp}</td>
-                            <td>Rp ${item.harga_sewa.toLocaleString()}</td>
-                            <td>Rp ${totalHarga.toLocaleString()}</td>
-                            <td><span class="${statusClass}">${statusText}</span></td>
-                            <td>
-                                <button class="btn btn-danger btn-sm" onclick="hapusPesanan(${item.id})">Hapus</button>
-                            </td>
-                        </tr>
-                    `;
+                            <tr>
+                                <td>${index + 1}</td>
+                                <td>${item.nama_pemesan}</td>
+                                <td>${item.nama_kos}</td>
+                                <td>${item.tanggal_survey}</td>
+                                <td>${item.jumlah_bulan}</td>
+                                <td>${item.email}</td>
+                                <td>${item.no_telp}</td>
+                                <td>Rp ${item.harga_sewa.toLocaleString()}</td>
+                                <td>Rp ${totalHarga.toLocaleString()}</td>
+                                <td><span class="${statusClass}">${statusText}</span></td>
+                                <td>
+                                    <button class="btn btn-danger btn-sm" onclick="hapusPesanan(${item.id})">Hapus</button>
+                                </td>
+                            </tr>
+                        `;
                     });
 
                     tableBody.innerHTML = rows;
@@ -127,7 +125,6 @@ include "../check_session.php";
             return;
         }
 
-        // Menambahkan konfirmasi sebelum menghapus
         Swal.fire({
             title: "Apakah Anda yakin?",
             text: "Data ini akan dihapus secara permanen!",
@@ -153,7 +150,7 @@ include "../check_session.php";
                                 confirmButtonColor: "#3085d6",
                                 confirmButtonText: "OK"
                             }).then(() => {
-                                location.reload(); // Reload halaman setelah alert ditutup
+                                location.reload();
                             });
                         } else {
                             Swal.fire("Gagal!", "Gagal menghapus pesanan: " + response.data.message,
@@ -166,11 +163,9 @@ include "../check_session.php";
                     });
             }
         });
-
     }
     </script>
 
 </body>
-
 
 </html>

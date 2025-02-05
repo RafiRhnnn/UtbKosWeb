@@ -82,11 +82,14 @@
                     <h3 data-aos="fade-right" data-aos-offset="50" data-aos-easing="ease-in-sine"
                         data-aos-duration="1000">Kenapa memilih UtbKos?</h3>
                     <p data-aos="fade-up" data-aos-duration="2000">
-                        UTBkos adalah platform pencarian kost yang menyediakan berbagai pilihan hunian nyaman, aman, dan terjangkau bagi mahasiswa dan pekerja.
-                        Kami menghubungkan pencari kost dengan pemilik kost secara mudah dan cepat, sehingga Anda dapat menemukan tempat tinggal yang sesuai dengan kebutuhan dan budget Anda.
+                        UTBkos adalah platform pencarian kost yang menyediakan berbagai pilihan hunian nyaman, aman, dan
+                        terjangkau bagi mahasiswa dan pekerja.
+                        Kami menghubungkan pencari kost dengan pemilik kost secara mudah dan cepat, sehingga Anda dapat
+                        menemukan tempat tinggal yang sesuai dengan kebutuhan dan budget Anda.
                     </p>
                     <p data-aos="fade-up" data-aos-duration="2000">
-                        Dengan sistem pencarian yang cepat dan fitur lengkap, Anda bisa menemukan hunian ideal dalam hitungan menit.
+                        Dengan sistem pencarian yang cepat dan fitur lengkap, Anda bisa menemukan hunian ideal dalam
+                        hitungan menit.
                     </p>
                 </div>
                 <!-- Kolom untuk gambar (kanan) -->
@@ -161,22 +164,24 @@
     <!-- Feature Section End -->
 
     <!-- Footer Start -->
-    <footer class="bg-dark text-white text-center py-3">
+    <footer class="bg-dark text-white text-center py-3" style="margin-top: auto;">
         <p>&copy; 2025 Utbkos. Kelompok 1. Kelas TIF 22 CID. UAS WEB 1</p>
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-md-12">
-                    <div class="d-flex justify-content-between flex-wrap">
-                        <p class="mx-2">1. Nama 1 - NIM 123456789</p>
-                        <p class="mx-2">2. Nama 2 - NIM 987654321</p>
-                        <p class="mx-2">3. Nama 3 - NIM 112233445</p>
-                        <p class="mx-2">4. Nama 4 - NIM 556677889</p>
-                        <p class="mx-2">5. Nama 5 - NIM 998877665</p>
+                    <div class="d-flex justify-content-center gap-3 flex-nowrap">
+                        <p class="m-0">Muhammad Rafi Raihan (22552011233)</p>
+                        <p class="m-0">Moch Ikhsan Futra M (22552011086)</p>
+                        <p class="m-0">Ahmad Zaenal (22552011083)</p>
+                        <p class="m-0">Ikbal Julianto (22552011067)</p>
+                        <p class="m-0">Yushela Windy Anggraeni (21552011002)</p>
                     </div>
                 </div>
             </div>
         </div>
     </footer>
+
+
 
 
 
