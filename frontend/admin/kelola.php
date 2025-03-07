@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+<!-- tesr -->
 
 <head>
     <meta charset="UTF-8">
@@ -50,109 +51,109 @@
     </div>
 
     <script>
-        $(document).ready(function() {
-            // Initialize DataTable
-            $('#newsTable').DataTable({
-                'processing': true,
-                'serverSide': true,
-                'ajax': function(data, callback) {
-                    axios.get('http://localhost/UtbKosWeb/backend/listkos.php', {
-                        params: {
-                            key: data.search.value
-                        }
-                    }).then(function(response) {
-                        response.data.forEach(function(row, index) {
-                            row.no = index + 1;
-                        });
-                        callback({
-                            draw: data.draw,
-                            recordsTotal: response.data.length,
-                            recordsFiltered: response.data.length,
-                            data: response.data
-                        });
-                    }).catch(function(error) {
-                        console.error(error);
-                        alert('Error fetching data.');
-                    });
-                },
-                'columns': [{
-                        'data': 'no'
-                    },
-                    {
-                        'data': 'namakos'
-                    },
-                    {
-                        'data': 'alamatkos'
-                    },
-                    {
-                        'data': 'hargasewa'
-                    },
-                    {
-                        'data': 'tipe'
-                    },
-                    {
-                        'data': 'notelp'
-                    },
-                    {
-                        'data': 'fasilitas'
-                    },
-                    {
-                        'data': 'detailkost'
-                    },
-                    {
-                        'data': 'img',
-                        'render': function(data) {
-                            return `<img src="${data}" style="max-width: 100px; max-height: 100px;">`;
-                        }
-                    },
-                    {
-                        "data": null,
-                        "render": function(data, type, row) {
-                            return '<button class="btn btn-danger btn-sm" onclick="deletekos(' + row
-                                .id + ')">Delete</button>' +
-                                '<form action="editkos.php" method="post" style="display:inline;">' +
-                                '<input type="hidden" name="id" value="' + row.id + '">' +
-                                '<button type="submit" class="btn btn-primary btn-sm">Edit</button>' +
-                                '</form>';
-                        }
+    $(document).ready(function() {
+        // Initialize DataTable
+        $('#newsTable').DataTable({
+            'processing': true,
+            'serverSide': true,
+            'ajax': function(data, callback) {
+                axios.get('http://localhost/UtbKosWeb/backend/listkos.php', {
+                    params: {
+                        key: data.search.value
                     }
-                ]
-            });
-        });
-
-        function deletekos(id) {
-            var formData = new FormData();
-            formData.append('idkos', id);
-
-            Swal.fire({
-                title: "Apakah Anda yakin?",
-                text: "Data ini akan dihapus secara permanen!",
-                icon: "warning",
-                showCancelButton: true,
-                confirmButtonColor: "#d33",
-                cancelButtonColor: "#3085d6",
-                confirmButtonText: "Ya, hapus!",
-                cancelButtonText: "Batal"
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    axios.post('http://localhost/UtbKosWeb/backend/deletekos.php', formData)
-                        .then(function(response) {
-                            Swal.fire({
-                                title: "Deleted!",
-                                text: "Kos berhasil dihapus!",
-                                icon: "success",
-                                showConfirmButton: false,
-                                timer: 2000
-                            });
-
-                            $('#newsTable').DataTable().ajax.reload();
-                        })
-                        .catch(function(error) {
-                            Swal.fire("Error!", "Gagal menghapus data.", "error");
-                        });
+                }).then(function(response) {
+                    response.data.forEach(function(row, index) {
+                        row.no = index + 1;
+                    });
+                    callback({
+                        draw: data.draw,
+                        recordsTotal: response.data.length,
+                        recordsFiltered: response.data.length,
+                        data: response.data
+                    });
+                }).catch(function(error) {
+                    console.error(error);
+                    alert('Error fetching data.');
+                });
+            },
+            'columns': [{
+                    'data': 'no'
+                },
+                {
+                    'data': 'namakos'
+                },
+                {
+                    'data': 'alamatkos'
+                },
+                {
+                    'data': 'hargasewa'
+                },
+                {
+                    'data': 'tipe'
+                },
+                {
+                    'data': 'notelp'
+                },
+                {
+                    'data': 'fasilitas'
+                },
+                {
+                    'data': 'detailkost'
+                },
+                {
+                    'data': 'img',
+                    'render': function(data) {
+                        return `<img src="${data}" style="max-width: 100px; max-height: 100px;">`;
+                    }
+                },
+                {
+                    "data": null,
+                    "render": function(data, type, row) {
+                        return '<button class="btn btn-danger btn-sm" onclick="deletekos(' + row
+                            .id + ')">Delete</button>' +
+                            '<form action="editkos.php" method="post" style="display:inline;">' +
+                            '<input type="hidden" name="id" value="' + row.id + '">' +
+                            '<button type="submit" class="btn btn-primary btn-sm">Edit</button>' +
+                            '</form>';
+                    }
                 }
-            });
-        }
+            ]
+        });
+    });
+
+    function deletekos(id) {
+        var formData = new FormData();
+        formData.append('idkos', id);
+
+        Swal.fire({
+            title: "Apakah Anda yakin?",
+            text: "Data ini akan dihapus secara permanen!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#d33",
+            cancelButtonColor: "#3085d6",
+            confirmButtonText: "Ya, hapus!",
+            cancelButtonText: "Batal"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                axios.post('http://localhost/UtbKosWeb/backend/deletekos.php', formData)
+                    .then(function(response) {
+                        Swal.fire({
+                            title: "Deleted!",
+                            text: "Kos berhasil dihapus!",
+                            icon: "success",
+                            showConfirmButton: false,
+                            timer: 2000
+                        });
+
+                        $('#newsTable').DataTable().ajax.reload();
+                    })
+                    .catch(function(error) {
+                        Swal.fire("Error!", "Gagal menghapus data.", "error");
+                    });
+            }
+        });
+    }
     </script>
 </body>
 
